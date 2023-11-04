@@ -6,17 +6,15 @@
 ;   [section] ; section goes between []
 ;   param=value ; assign values to parameters
 
-config_version=4
+config_version=5
 
 [application]
 
-config/name="2D Tactical Space Combat - Start Project"
-config/icon="res://icon.png"
-
-[editor_plugins]
-
-enabled=PoolStringArray( "res://addons/ColorPickerPresets/plugin.cfg" )
+config/name="Game 6 - Tactical Space Combat"
+config/features=PackedStringArray("4.1", "GL Compatibility")
+config/icon="res://icon.svg"
 
 [rendering]
 
-environment/default_environment="res://default_env.tres"
+renderer/rendering_method="gl_compatibility"
+renderer/rendering_method.mobile="gl_compatibility"
