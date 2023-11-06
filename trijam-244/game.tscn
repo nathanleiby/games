@@ -114,7 +114,7 @@ process_mode = 2
 layout_mode = 2
 text = "Play Again?"
 
-[node name="Label" type="Label" parent="UI/VBoxContainer"]
+[node name="HowtoPlayLabel" type="Label" parent="UI/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 text = "

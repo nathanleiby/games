@@ -1,0 +1,25 @@
+# TODO
+
+- [x] game over events
+- [x] add a score (time survived as MVP)
+- pretty
+  - add music
+    - [x] game music
+    - [x] game over music
+  - add sounds:
+    - [x] collision
+    - ball bounce?
+    - thrust
+    - game lobby
+      - click "accept" / start
+        - related bug: game timer starts before game starts on initial load
+  - collision screen shake
+    - https://kidscancode.org/godot_recipes/3.x/2d/screen_shake/index.html
+  - add a UI theme... nicer font
+  - background
+    - add a parallax background
+    - or a shader background
+  - user nicer art for ball and blocks -- theme?
+- [x] add a jump action for funz and to handle bad luck layouts
+  - [x] make it a limited resource (e.g. 3, and they recharge slowly)
+- add a collectible for points?
