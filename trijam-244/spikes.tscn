@@ -1,0 +1,291 @@
+[gd_scene format=3 uid="uid://c5iogudo1bc7v"]
+
+[node name="Spikes" type="Node2D"]
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = 6.62742
+offset_top = -25.3726
+offset_right = 38.6274
+offset_bottom = 6.62744
+rotation = 0.785398
+pivot_offset = Vector2(16, 16)
+
+[node name="ColorRect2" type="ColorRect" parent="."]
+offset_left = 38.6274
+offset_top = -25.3726
+offset_right = 70.6274
+offset_bottom = 6.62742
+rotation = 0.785398
+pivot_offset = Vector2(16, 16)
+
+[node name="ColorRect3" type="ColorRect" parent="."]
+offset_left = 70.6274
+offset_top = -25.3726
+offset_right = 102.627
+offset_bottom = 6.62745
+rotation = 0.785398
+pivot_offset = Vector2(16, 16)
+
+[node name="ColorRect4" type="ColorRect" parent="."]
+offset_left = 102.627
+offset_top = -25.3726
+offset_right = 134.627
+offset_bottom = 6.62743
+rotation = 0.785398
+pivot_offset = Vector2(16, 16)
+
+[node name="ColorRect5" type="ColorRect" parent="."]
+offset_left = 134.627
+offset_top = -25.3726
+offset_right = 166.627
+offset_bottom = 6.62743
+rotation = 0.785398
+pivot_offset = Vector2(16, 16)
+
+[node name="ColorRect6" type="ColorRect" parent="."]
+offset_left = 166.627
+offset_top = -25.3726
+offset_right = 198.627
+offset_bottom = 6.62742
+rotation = 0.785398
+pivot_offset = Vector2(16, 16)
+
+[node name="ColorRect7" type="ColorRect" parent="."]
+offset_left = 198.627
+offset_top = -25.3726
+offset_right = 230.627
+offset_bottom = 6.62744
+rotation = 0.785398
+pivot_offset = Vector2(16, 16)
+
+[node name="ColorRect8" type="ColorRect" parent="."]
+offset_left = 230.627
+offset_top = -25.3726
+offset_right = 262.627
+offset_bottom = 6.62743
+rotation = 0.785398
+pivot_offset = Vector2(16, 16)
+
+[node name="ColorRect9" type="ColorRect" parent="."]
+offset_left = 262.627
+offset_top = -25.3726
+offset_right = 294.627
+offset_bottom = 6.62743
+rotation = 0.785398
+pivot_offset = Vector2(16, 16)
+
+[node name="ColorRect10" type="ColorRect" parent="."]
+offset_left = 294.627
+offset_top = -25.3726
+offset_right = 326.627
+offset_bottom = 6.62741
+rotation = 0.785398
+pivot_offset = Vector2(16, 16)
+
+[node name="ColorRect11" type="ColorRect" parent="."]
+offset_left = 326.627
+offset_top = -25.3726
+offset_right = 358.627
+offset_bottom = 6.62744
+rotation = 0.785398
+pivot_offset = Vector2(16, 16)
+
+[node name="ColorRect12" type="ColorRect" parent="."]
+offset_left = 358.627
+offset_top = -25.3726
+offset_right = 390.627
+offset_bottom = 6.62742
+rotation = 0.785398
+pivot_offset = Vector2(16, 16)
+
+[node name="ColorRect13" type="ColorRect" parent="."]
+offset_left = 390.627
+offset_top = -25.3726
+offset_right = 422.627
+offset_bottom = 6.62742
+rotation = 0.785398
+pivot_offset = Vector2(16, 16)
+
+[node name="ColorRect14" type="ColorRect" parent="."]
+offset_left = 422.627
+offset_top = -25.3726
+offset_right = 454.627
+offset_bottom = 6.62741
+rotation = 0.785398
+pivot_offset = Vector2(16, 16)
+
+[node name="ColorRect15" type="ColorRect" parent="."]
+offset_left = 454.627
+offset_top = -25.3726
+offset_right = 486.627
+offset_bottom = 6.62743
+rotation = 0.785398
+pivot_offset = Vector2(16, 16)
+
+[node name="ColorRect16" type="ColorRect" parent="."]
+offset_left = 486.627
+offset_top = -25.3726
+offset_right = 518.627
+offset_bottom = 6.62742
+rotation = 0.785398
+pivot_offset = Vector2(16, 16)
+
+[node name="ColorRect17" type="ColorRect" parent="."]
+offset_left = 518.627
+offset_top = -25.3726
+offset_right = 550.627
+offset_bottom = 6.62744
+rotation = 0.785398
+pivot_offset = Vector2(16, 16)
+
+[node name="ColorRect18" type="ColorRect" parent="."]
+offset_left = 550.627
+offset_top = -25.3726
+offset_right = 582.627
+offset_bottom = 6.62741
+rotation = 0.785398
+pivot_offset = Vector2(16, 16)
+
+[node name="ColorRect19" type="ColorRect" parent="."]
+offset_left = 582.627
+offset_top = -25.3726
+offset_right = 614.627
+offset_bottom = 6.62744
+rotation = 0.785398
+pivot_offset = Vector2(16, 16)
+
+[node name="ColorRect20" type="ColorRect" parent="."]
+offset_left = 614.627
+offset_top = -25.3726
+offset_right = 646.627
+offset_bottom = 6.62741
+rotation = 0.785398
+pivot_offset = Vector2(16, 16)
+
+[node name="ColorRect21" type="ColorRect" parent="."]
+offset_left = 646.627
+offset_top = -25.3726
+offset_right = 678.627
+offset_bottom = 6.62741
+rotation = 0.785398
+pivot_offset = Vector2(16, 16)
+
+[node name="ColorRect22" type="ColorRect" parent="."]
+offset_left = 678.627
+offset_top = -25.3726
+offset_right = 710.627
+offset_bottom = 6.62741
+rotation = 0.785398
+pivot_offset = Vector2(16, 16)
+
+[node name="ColorRect23" type="ColorRect" parent="."]
+offset_left = 710.627
+offset_top = -25.3726
+offset_right = 742.627
+offset_bottom = 6.62744
+rotation = 0.785398
+pivot_offset = Vector2(16, 16)
+
+[node name="ColorRect24" type="ColorRect" parent="."]
+offset_left = 742.627
+offset_top = -25.3726
+offset_right = 774.627
+offset_bottom = 6.62741
+rotation = 0.785398
+pivot_offset = Vector2(16, 16)
+
+[node name="ColorRect25" type="ColorRect" parent="."]
+offset_left = 774.627
+offset_top = -25.3726
+offset_right = 806.627
+offset_bottom = 6.62741
+rotation = 0.785398
+pivot_offset = Vector2(16, 16)
+
+[node name="ColorRect26" type="ColorRect" parent="."]
+offset_left = 806.627
+offset_top = -25.3726
+offset_right = 838.627
+offset_bottom = 6.62741
+rotation = 0.785398
+pivot_offset = Vector2(16, 16)
+
+[node name="ColorRect27" type="ColorRect" parent="."]
+offset_left = 838.627
+offset_top = -25.3726
+offset_right = 870.627
+offset_bottom = 6.62744
+rotation = 0.785398
+pivot_offset = Vector2(16, 16)
+
+[node name="ColorRect28" type="ColorRect" parent="."]
+offset_left = 870.627
+offset_top = -25.3726
+offset_right = 902.627
+offset_bottom = 6.62741
+rotation = 0.785398
+pivot_offset = Vector2(16, 16)
+
+[node name="ColorRect29" type="ColorRect" parent="."]
+offset_left = 902.627
+offset_top = -25.3726
+offset_right = 934.627
+offset_bottom = 6.62741
+rotation = 0.785398
+pivot_offset = Vector2(16, 16)
+
+[node name="ColorRect30" type="ColorRect" parent="."]
+offset_left = 934.627
+offset_top = -25.3726
+offset_right = 966.627
+offset_bottom = 6.62741
+rotation = 0.785398
+pivot_offset = Vector2(16, 16)
+
+[node name="ColorRect31" type="ColorRect" parent="."]
+offset_left = 966.627
+offset_top = -25.3726
+offset_right = 998.627
+offset_bottom = 6.62741
+rotation = 0.785398
+pivot_offset = Vector2(16, 16)
+
+[node name="ColorRect32" type="ColorRect" parent="."]
+offset_left = 998.627
+offset_top = -25.3726
+offset_right = 1030.63
+offset_bottom = 6.62741
+rotation = 0.785398
+pivot_offset = Vector2(16, 16)
+
+[node name="ColorRect33" type="ColorRect" parent="."]
+offset_left = 1030.63
+offset_top = -25.3726
+offset_right = 1062.63
+offset_bottom = 6.62741
+rotation = 0.785398
+pivot_offset = Vector2(16, 16)
+
+[node name="ColorRect34" type="ColorRect" parent="."]
+offset_left = 1062.63
+offset_top = -25.3726
+offset_right = 1094.63
+offset_bottom = 6.62741
+rotation = 0.785398
+pivot_offset = Vector2(16, 16)
+
+[node name="ColorRect35" type="ColorRect" parent="."]
+offset_left = 1094.63
+offset_top = -25.3726
+offset_right = 1126.63
+offset_bottom = 6.62741
+rotation = 0.785398
+pivot_offset = Vector2(16, 16)
+
+[node name="ColorRect36" type="ColorRect" parent="."]
+offset_left = 1126.63
+offset_top = -25.3726
+offset_right = 1158.63
+offset_bottom = 6.62741
+rotation = 0.785398
+pivot_offset = Vector2(16, 16)

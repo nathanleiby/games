@@ -1,9 +1,13 @@
-[gd_scene load_steps=8 format=3 uid="uid://gxlcei57x3xv"]
+[gd_scene load_steps=14 format=3 uid="uid://gxlcei57x3xv"]
 
 [ext_resource type="PackedScene" uid="uid://b0rnbbw3nwvf3" path="res://ball.tscn" id="1_d5rrr"]
 [ext_resource type="Script" path="res://game.gd" id="1_eovam"]
 [ext_resource type="PackedScene" uid="uid://cdwy46xxmr0rr" path="res://block.tscn" id="2_86pri"]
 [ext_resource type="Shader" path="res://game.gdshader" id="4_jn25r"]
+[ext_resource type="AudioStream" uid="uid://d0srl7ubjjw8p" path="res://midnight_cruiser.mp3" id="5_2d2v1"]
+[ext_resource type="AudioStream" uid="uid://c7awbte0hd7bv" path="res://qubodup-crash.ogg" id="6_0mkys"]
+[ext_resource type="AudioStream" uid="uid://drue3wr4867mj" path="res://losegamemusic.ogg" id="6_7wgbf"]
+[ext_resource type="PackedScene" uid="uid://c5iogudo1bc7v" path="res://spikes.tscn" id="8_4xpfi"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_8snx1"]
 shader = ExtResource("4_jn25r")
@@ -13,6 +17,15 @@ font_size = 32
 
 [sub_resource type="LabelSettings" id="LabelSettings_sdpq5"]
 font_size = 64
+outline_size = 16
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_w8qcm"]
+line_spacing = 12.0
+font_size = 20
+
+[sub_resource type="LabelSettings" id="LabelSettings_1w0mj"]
+font_size = 24
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_eovam")
@@ -20,6 +33,8 @@ blockScene = ExtResource("2_86pri")
 
 [node name="Ball" parent="." instance=ExtResource("1_d5rrr")]
 position = Vector2(576, 64)
+max_contacts_reported = 1
+contact_monitor = true
 
 [node name="Blocks" type="Node2D" parent="."]
 
@@ -54,6 +69,7 @@ grow_vertical = 2
 [node name="GameOverOverlay" type="ColorRect" parent="UI"]
 visible = false
 material = SubResource("ShaderMaterial_8snx1")
+layout_mode = 0
 offset_right = 1152.0
 offset_bottom = 648.0
 color = Color(0.141176, 0.141176, 0.141176, 0.929412)
@@ -98,5 +114,48 @@ process_mode = 2
 layout_mode = 2
 text = "Play Again?"
 
+[node name="Label" type="Label" parent="UI/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "
+How to Play:
+  Left Arrow = Roll Left
+  Right Arrow = Roll Right
+  Spacebar = Jump"
+label_settings = SubResource("LabelSettings_w8qcm")
+
+[node name="JumpsLabel" type="Label" parent="UI"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -66.0
+offset_bottom = 26.0
+grow_horizontal = 0
+text = "Jumps: 0"
+label_settings = SubResource("LabelSettings_1w0mj")
+
+[node name="BackgroundMusic" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_2d2v1")
+autoplay = true
+
+[node name="CollideSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_0mkys")
+
+[node name="GameOverMusic" type="AudioStreamPlayer2D" parent="."]
+process_mode = 2
+stream = ExtResource("6_7wgbf")
+volume_db = -5.0
+autoplay = true
+
+[node name="Spikes" parent="." instance=ExtResource("8_4xpfi")]
+visible = false
+
+[node name="JumpRechargeTimer" type="Timer" parent="."]
+wait_time = 5.0
+autostart = true
+
+[connection signal="body_entered" from="Ball" to="." method="_on_ball_body_entered"]
 [connection signal="timeout" from="SpawnTimer" to="." method="_on_spawn_timer_timeout"]
 [connection signal="pressed" from="UI/VBoxContainer/RestartButton" to="." method="_on_restart_button_pressed"]
+[connection signal="timeout" from="JumpRechargeTimer" to="." method="_on_jump_recharge_timer_timeout"]
