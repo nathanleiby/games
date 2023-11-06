@@ -1,0 +1,102 @@
+[gd_scene load_steps=8 format=3 uid="uid://gxlcei57x3xv"]
+
+[ext_resource type="PackedScene" uid="uid://b0rnbbw3nwvf3" path="res://ball.tscn" id="1_d5rrr"]
+[ext_resource type="Script" path="res://game.gd" id="1_eovam"]
+[ext_resource type="PackedScene" uid="uid://cdwy46xxmr0rr" path="res://block.tscn" id="2_86pri"]
+[ext_resource type="Shader" path="res://game.gdshader" id="4_jn25r"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8snx1"]
+shader = ExtResource("4_jn25r")
+
+[sub_resource type="LabelSettings" id="LabelSettings_wamo5"]
+font_size = 32
+
+[sub_resource type="LabelSettings" id="LabelSettings_sdpq5"]
+font_size = 64
+
+[node name="Game" type="Node2D"]
+script = ExtResource("1_eovam")
+blockScene = ExtResource("2_86pri")
+
+[node name="Ball" parent="." instance=ExtResource("1_d5rrr")]
+position = Vector2(576, 64)
+
+[node name="Blocks" type="Node2D" parent="."]
+
+[node name="Block" parent="Blocks" instance=ExtResource("2_86pri")]
+position = Vector2(576, 548)
+
+[node name="SpawnTimer" type="Timer" parent="."]
+wait_time = 2.2
+autostart = true
+
+[node name="Background" type="Node2D" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="Background"]
+material = SubResource("ShaderMaterial_8snx1")
+offset_right = 1152.0
+offset_bottom = 648.0
+color = Color(1, 0.368627, 1, 0.152941)
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="Background"]
+visible = false
+
+[node name="UI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 1152.0
+offset_bottom = 648.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="GameOverOverlay" type="ColorRect" parent="UI"]
+visible = false
+material = SubResource("ShaderMaterial_8snx1")
+offset_right = 1152.0
+offset_bottom = 648.0
+color = Color(0.141176, 0.141176, 0.141176, 0.929412)
+
+[node name="TimeLabel" type="Label" parent="UI"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -31.5
+offset_top = -48.0
+offset_right = 31.5
+grow_horizontal = 2
+grow_vertical = 0
+text = "0:00"
+label_settings = SubResource("LabelSettings_wamo5")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI"]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -47.5
+offset_top = -20.0
+offset_right = 47.5
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="GameOverLabel" type="Label" parent="UI/VBoxContainer"]
+layout_mode = 2
+text = "GAME OVER"
+label_settings = SubResource("LabelSettings_sdpq5")
+
+[node name="RestartButton" type="Button" parent="UI/VBoxContainer"]
+process_mode = 2
+layout_mode = 2
+text = "Play Again?"
+
+[connection signal="timeout" from="SpawnTimer" to="." method="_on_spawn_timer_timeout"]
+[connection signal="pressed" from="UI/VBoxContainer/RestartButton" to="." method="_on_restart_button_pressed"]
