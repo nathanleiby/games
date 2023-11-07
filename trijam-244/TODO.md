@@ -1,5 +1,11 @@
 # TODO
 
+- jam feedback (https://itch.io/jam/trijam-244/rate/2353847)
+  - a ghost effect when player move
+  - camera shake when player fall
+  - particles when player jump
+  - a little more speed for movements
+  - jump was lower and went further, so I didn't hit my head on the upper platforms
 - [x] game over events
 - [x] add a score (time survived as MVP)
 - pretty
