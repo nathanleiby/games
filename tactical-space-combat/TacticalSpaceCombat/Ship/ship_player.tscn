@@ -1,9 +1,14 @@
-[gd_scene load_steps=3 format=3 uid="uid://5smrfcw656jt"]
+[gd_scene load_steps=5 format=3 uid="uid://5smrfcw656jt"]
 
 [ext_resource type="PackedScene" uid="uid://cbuxdovs7ific" path="res://TacticalSpaceCombat/Ship/Rooms/room.tscn" id="1_g6etn"]
 [ext_resource type="PackedScene" uid="uid://brwn6vvlip7ko" path="res://TacticalSpaceCombat/Ship/ship_template.tscn" id="1_um77c"]
+[ext_resource type="PackedScene" uid="uid://cvalb031fo8s5" path="res://TacticalSpaceCombat/Ship/Rooms/wall.tscn" id="3_qe84m"]
+[ext_resource type="PackedScene" uid="uid://b7m4sssdmmfv" path="res://TacticalSpaceCombat/Ship/Rooms/door.tscn" id="4_dibip"]
 
 [node name="ShipPlayer" instance=ExtResource("1_um77c")]
+
+[node name="Rooms" parent="." index="0"]
+metadata/_edit_lock_ = true
 
 [node name="Room" parent="Rooms" index="0" instance=ExtResource("1_g6etn")]
 position = Vector2(96, 64)
@@ -14,5 +19,40 @@ position = Vector2(288, 96)
 size = Vector2(3, 3)
 
 [node name="Room3" parent="Rooms" index="2" instance=ExtResource("1_g6etn")]
-position = Vector2(448, 192)
-size = Vector2(2, 2)
+position = Vector2(448, 160)
+size = Vector2(2, 1)
+
+[node name="Room4" parent="Rooms" index="3" instance=ExtResource("1_g6etn")]
+position = Vector2(448, 224)
+size = Vector2(2, 1)
+
+[node name="Walls" parent="." index="1"]
+metadata/_edit_lock_ = true
+
+[node name="Wall" parent="Walls" index="0" instance=ExtResource("3_qe84m")]
+position = Vector2(0, 30.2692)
+scale = Vector2(1, 1.26923)
+points = PackedVector2Array(192, -23, 192, 73)
+
+[node name="Wall2" parent="Walls" index="1" instance=ExtResource("3_qe84m")]
+points = PackedVector2Array(384, 128, 384, 192)
+
+[node name="Wall3" parent="Walls" index="2" instance=ExtResource("3_qe84m")]
+points = PackedVector2Array(384, 192, 512, 192)
+
+[node name="Doors" parent="." index="2"]
+metadata/_edit_lock_ = true
+
+[node name="Door" parent="Doors" index="0" instance=ExtResource("4_dibip")]
+position = Vector2(192, 96)
+rotation = 1.5708
+
+[node name="Door2" parent="Doors" index="1" instance=ExtResource("4_dibip")]
+position = Vector2(384, 160)
+rotation = 1.5708
+
+[node name="Door3" parent="Doors" index="2" instance=ExtResource("4_dibip")]
+position = Vector2(480, 192)
+
+[node name="TileMap" parent="." index="3"]
+metadata/_edit_lock_ = true
