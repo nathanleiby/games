@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://5smrfcw656jt"]
+
+[ext_resource type="PackedScene" uid="uid://cbuxdovs7ific" path="res://TacticalSpaceCombat/Ship/Rooms/room.tscn" id="1_g6etn"]
+[ext_resource type="PackedScene" uid="uid://brwn6vvlip7ko" path="res://TacticalSpaceCombat/Ship/ship_template.tscn" id="1_um77c"]
+
+[node name="ShipPlayer" instance=ExtResource("1_um77c")]
+
+[node name="Room" parent="Rooms" index="0" instance=ExtResource("1_g6etn")]
+position = Vector2(96, 64)
+size = Vector2(3, 2)
+
+[node name="Room2" parent="Rooms" index="1" instance=ExtResource("1_g6etn")]
+position = Vector2(288, 96)
+size = Vector2(3, 3)
+
+[node name="Room3" parent="Rooms" index="2" instance=ExtResource("1_g6etn")]
+position = Vector2(448, 192)
+size = Vector2(2, 2)
