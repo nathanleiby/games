@@ -62,7 +62,14 @@ points = PackedVector2Array(384, 192, 512, 192)
 script = ExtResource("5_ox3vo")
 
 [node name="UnitPlayer" parent="Units" index="0" instance=ExtResource("6_cqr6a")]
+
+[node name="PathFollow2D" parent="Units/UnitPlayer" index="0"]
 position = Vector2(160, 160)
 
 [node name="UnitPlayer2" parent="Units" index="1" instance=ExtResource("6_cqr6a")]
+
+[node name="PathFollow2D" parent="Units/UnitPlayer2" index="0"]
 position = Vector2(288, 224)
+
+[editable path="Units/UnitPlayer"]
+[editable path="Units/UnitPlayer2"]
