@@ -23,7 +23,6 @@ func _input(event: InputEvent):
 			_polygon.set(index, mouse_position)
 
 		for unit in get_children():
-			print("unit class", unit.get_class())
 			unit.is_selected = false
 
 	elif _is_selecting and event is InputEventMouseMotion:
@@ -58,5 +57,4 @@ func select_units():
 	query.collision_mask = Global.Layers["UI"]
 
 	for dict in get_world_2d().direct_space_state.intersect_shape(query):
-		print("Collider owner name", dict.collider.owner.name)
 		dict.collider.owner.is_selected = true
