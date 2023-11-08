@@ -8,7 +8,8 @@ var _is_selecting := false
 var _polygon := DEFAULT_POLYGON
 
 func _draw():
-	draw_polygon(_polygon, [self_modulate])
+	if _is_selecting:
+		draw_polygon(_polygon, [self_modulate])
 
 func _input(event: InputEvent):
 	if not event is InputEventMouse:
@@ -36,6 +37,7 @@ func _input(event: InputEvent):
 		_polygon = DEFAULT_POLYGON
 
 	queue_redraw()
+
 
 func select_units():
 	# for unit in get_children():
