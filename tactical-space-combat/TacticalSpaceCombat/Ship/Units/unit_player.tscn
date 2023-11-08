@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://dmd10wv0m26mg"]
+
+[ext_resource type="PackedScene" uid="uid://cmw3iplx3iavm" path="res://TacticalSpaceCombat/Ship/Units/unit.tscn" id="1_ju4yt"]
+[ext_resource type="Script" path="res://TacticalSpaceCombat/Ship/Units/unit_player.gd" id="2_7rr86"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_pbqln"]
+radius = 24.0
+
+[node name="UnitPlayer" instance=ExtResource("1_ju4yt")]
+script = ExtResource("2_7rr86")
+
+[node name="AreaSelect" type="Area2D" parent="PathFollow2D" index="1"]
+collision_layer = 524288
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PathFollow2D/AreaSelect" index="0"]
+shape = SubResource("CircleShape2D_pbqln")

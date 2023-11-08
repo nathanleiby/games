@@ -42,11 +42,7 @@ func _setup_extents():
 		var topLeftPx: Vector2 = position - collision_shape.shape.size / 2
 		topLeft = _tilemap.local_to_map(topLeftPx)
 		bottomRight = topLeft + size - Vector2.ONE
-		# print("node = ", self.name, \
-		# 	"size = ", size,
-		# 	" topLeftPx = ", topLeftPx, \
-		# 	"topLeft = ", topLeft, \
-		# 	"bottomRight =", bottomRight)
+
 
 # Custom Iterator
 # This allows us to iterate through the "cells" (tiles) of the room

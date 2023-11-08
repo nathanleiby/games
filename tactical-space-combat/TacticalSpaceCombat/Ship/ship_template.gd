@@ -34,7 +34,6 @@ func _not_ready_editor_hint():
 
 		var points := []
 		for point in room:
-			print(room.name, " ", point)
 			tilemap.set_cell(LAYER, point)
 			points.append(point)
 

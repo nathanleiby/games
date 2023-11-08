@@ -1,57 +1,70 @@
-[gd_scene load_steps=5 format=3 uid="uid://5smrfcw656jt"]
+[gd_scene load_steps=7 format=3 uid="uid://5smrfcw656jt"]
 
 [ext_resource type="PackedScene" uid="uid://cbuxdovs7ific" path="res://TacticalSpaceCombat/Ship/Rooms/room.tscn" id="1_g6etn"]
 [ext_resource type="PackedScene" uid="uid://brwn6vvlip7ko" path="res://TacticalSpaceCombat/Ship/ship_template.tscn" id="1_um77c"]
 [ext_resource type="PackedScene" uid="uid://cvalb031fo8s5" path="res://TacticalSpaceCombat/Ship/Rooms/wall.tscn" id="3_qe84m"]
 [ext_resource type="PackedScene" uid="uid://b7m4sssdmmfv" path="res://TacticalSpaceCombat/Ship/Rooms/door.tscn" id="4_dibip"]
+[ext_resource type="Script" path="res://TacticalSpaceCombat/Ship/Units.gd" id="5_ox3vo"]
+[ext_resource type="PackedScene" uid="uid://dmd10wv0m26mg" path="res://TacticalSpaceCombat/Ship/Units/unit_player.tscn" id="6_cqr6a"]
 
 [node name="ShipPlayer" instance=ExtResource("1_um77c")]
 
+[node name="TileMap" parent="." index="0"]
+metadata/_edit_lock_ = true
+
 [node name="Room" parent="Rooms" index="0" instance=ExtResource("1_g6etn")]
-position = Vector2(352, 320)
+position = Vector2(160, 128)
 size = Vector2(3, 2)
 
 [node name="Room2" parent="Rooms" index="1" instance=ExtResource("1_g6etn")]
-position = Vector2(544, 352)
+position = Vector2(352, 160)
 size = Vector2(3, 3)
 
 [node name="Room3" parent="Rooms" index="2" instance=ExtResource("1_g6etn")]
-position = Vector2(704, 416)
+position = Vector2(512, 224)
 size = Vector2(2, 1)
 
 [node name="Room4" parent="Rooms" index="3" instance=ExtResource("1_g6etn")]
-position = Vector2(704, 480)
+position = Vector2(512, 288)
 size = Vector2(2, 1)
-
-[node name="Walls" parent="." index="1"]
-z_index = 1
-
-[node name="Wall" parent="Walls" index="0" instance=ExtResource("3_qe84m")]
-position = Vector2(256, 286.269)
-scale = Vector2(1, 1.26923)
-points = PackedVector2Array(192, -23, 192, 73)
-
-[node name="Wall2" parent="Walls" index="1" instance=ExtResource("3_qe84m")]
-position = Vector2(256, 256)
-points = PackedVector2Array(384, 128, 384, 192)
-
-[node name="Wall3" parent="Walls" index="2" instance=ExtResource("3_qe84m")]
-position = Vector2(256, 256)
-points = PackedVector2Array(384, 192, 512, 192)
 
 [node name="Doors" parent="." index="2"]
 z_index = 2
 
 [node name="Door" parent="Doors" index="0" instance=ExtResource("4_dibip")]
-position = Vector2(448, 352)
+position = Vector2(256, 160)
 rotation = 1.5708
 
 [node name="Door2" parent="Doors" index="1" instance=ExtResource("4_dibip")]
-position = Vector2(640, 416)
+position = Vector2(448, 224)
 rotation = 1.5708
 
 [node name="Door3" parent="Doors" index="2" instance=ExtResource("4_dibip")]
-position = Vector2(736, 448)
+position = Vector2(544, 256)
 
-[node name="TileMap" parent="." index="3"]
-metadata/_edit_lock_ = true
+[node name="Walls" parent="." index="3"]
+z_index = 1
+
+[node name="Wall" parent="Walls" index="0" instance=ExtResource("3_qe84m")]
+position = Vector2(64, 94.2692)
+scale = Vector2(1, 1.26923)
+points = PackedVector2Array(192, -23, 192, 73)
+
+[node name="Wall2" parent="Walls" index="1" instance=ExtResource("3_qe84m")]
+position = Vector2(64, 64)
+points = PackedVector2Array(384, 128, 384, 192)
+
+[node name="Wall3" parent="Walls" index="2" instance=ExtResource("3_qe84m")]
+position = Vector2(64, 64)
+points = PackedVector2Array(384, 192, 512, 192)
+
+[node name="Units" parent="." index="4"]
+script = ExtResource("5_ox3vo")
+
+[node name="UnitPlayer" parent="Units" index="0" instance=ExtResource("6_cqr6a")]
+position = Vector2(160, 160)
+script = null
+
+[node name="UnitPlayer2" parent="Units" index="1" instance=ExtResource("6_cqr6a")]
+position = Vector2(288, 224)
+script = null
