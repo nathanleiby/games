@@ -4,6 +4,7 @@ extends Node2D
 
 @onready var tilemap: TileMap = $TileMap
 @onready var rooms: Node2D = $Rooms
+@onready var units: Node2D = $Units
 
 # NOTE: Would be super cool if the editor could expose these as enums somehow
 # vs needing to deal with mapping IDs in code

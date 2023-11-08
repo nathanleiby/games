@@ -8,73 +8,75 @@
 [ext_resource type="PackedScene" uid="uid://dmd10wv0m26mg" path="res://TacticalSpaceCombat/Ship/Units/unit_player.tscn" id="6_cqr6a"]
 
 [node name="ShipPlayer" instance=ExtResource("1_um77c")]
+position = Vector2(2.08165e-12, 2.08165e-12)
 
 [node name="TileMap" parent="." index="0"]
 metadata/_edit_lock_ = true
 
 [node name="Room" parent="Rooms" index="0" instance=ExtResource("1_g6etn")]
-position = Vector2(160, 128)
+position = Vector2(96, 64)
 size = Vector2(3, 2)
 
 [node name="Room2" parent="Rooms" index="1" instance=ExtResource("1_g6etn")]
-position = Vector2(352, 160)
+position = Vector2(288, 96)
 size = Vector2(3, 3)
 
 [node name="Room3" parent="Rooms" index="2" instance=ExtResource("1_g6etn")]
-position = Vector2(512, 224)
+position = Vector2(448, 160)
 size = Vector2(2, 1)
 
 [node name="Room4" parent="Rooms" index="3" instance=ExtResource("1_g6etn")]
-position = Vector2(512, 288)
+position = Vector2(448, 224)
 size = Vector2(2, 1)
 
 [node name="Doors" parent="." index="2"]
 z_index = 2
 
 [node name="Door" parent="Doors" index="0" instance=ExtResource("4_dibip")]
-position = Vector2(256, 160)
+position = Vector2(192, 96)
 rotation = 1.5708
 
 [node name="Door2" parent="Doors" index="1" instance=ExtResource("4_dibip")]
-position = Vector2(448, 224)
+position = Vector2(384, 160)
 rotation = 1.5708
 
 [node name="Door3" parent="Doors" index="2" instance=ExtResource("4_dibip")]
-position = Vector2(544, 256)
+position = Vector2(480, 192)
 
 [node name="Walls" parent="." index="3"]
 z_index = 1
 
 [node name="Wall" parent="Walls" index="0" instance=ExtResource("3_qe84m")]
-position = Vector2(64, 94.2692)
+position = Vector2(0, 30.2692)
 scale = Vector2(1, 1.26923)
 points = PackedVector2Array(192, -23, 192, 73)
 
 [node name="Wall2" parent="Walls" index="1" instance=ExtResource("3_qe84m")]
-position = Vector2(64, 64)
+position = Vector2(0, 7.62939e-06)
 points = PackedVector2Array(384, 128, 384, 192)
 
 [node name="Wall3" parent="Walls" index="2" instance=ExtResource("3_qe84m")]
-position = Vector2(64, 64)
+position = Vector2(0, 7.62939e-06)
 points = PackedVector2Array(384, 192, 512, 192)
 
 [node name="Units" parent="." index="4"]
+position = Vector2(0, -1)
 script = ExtResource("5_ox3vo")
 
 [node name="UnitPlayer" parent="Units" index="0" instance=ExtResource("6_cqr6a")]
 
 [node name="PathFollow2D" parent="Units/UnitPlayer" index="0"]
-position = Vector2(192, 160)
+position = Vector2(128, 97)
 
 [node name="UnitPlayer2" parent="Units" index="1" instance=ExtResource("6_cqr6a")]
 
 [node name="PathFollow2D" parent="Units/UnitPlayer2" index="0"]
-position = Vector2(288, 224)
+position = Vector2(224, 161)
 
 [node name="UnitPlayer3" parent="Units" index="2" instance=ExtResource("6_cqr6a")]
 
 [node name="PathFollow2D" parent="Units/UnitPlayer3" index="0"]
-position = Vector2(544, 224)
+position = Vector2(480, 161)
 
 [editable path="Units/UnitPlayer"]
 [editable path="Units/UnitPlayer2"]
