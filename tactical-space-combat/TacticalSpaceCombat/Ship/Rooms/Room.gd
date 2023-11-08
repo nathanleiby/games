@@ -26,22 +26,35 @@ var _iter_index := 0
 var _tilemap: TileMap = null
 
 @onready var collision_shape: CollisionShape2D = $CollisionShape2D
+@onready var feedback: NinePatchRect = $Feedback
 
+func _ready():
+	connect("mouse_entered", _on_mouse_entered_exited.bind(true))
+	connect("mouse_exited", _on_mouse_entered_exited.bind(false))
+	
+func _on_mouse_entered_exited(has_entered: bool):
+	feedback.visible = has_entered
+	if has_entered:
+		add_to_group(Global.Groups.SelectedRoom)
+	else:
+		remove_from_group(Global.Groups.SelectedRoom)
+		
 func setup(tilemap: TileMap):
 	_tilemap = tilemap
 	_setup_extents()
 
-
 func _setup_extents():
 	if _tilemap != null:
 		# TODO: investigate 32 fudge factor
-		var outSize := _tilemap.map_to_local(size)
-		collision_shape.shape.size = outSize - Vector2(32, 32)
+		collision_shape.shape.size = _tilemap.map_to_local(size) - Vector2(32, 32)
 
 		_area = int(size.x * size.y)
 		var topLeftPx: Vector2 = position - collision_shape.shape.size / 2
 		topLeft = _tilemap.local_to_map(topLeftPx)
 		bottomRight = topLeft + size - Vector2.ONE
+		
+		feedback.position = collision_shape.position - (collision_shape.shape.size / 2)
+		feedback.size = collision_shape.shape.size
 
 
 # Custom Iterator

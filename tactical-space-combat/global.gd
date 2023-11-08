@@ -10,4 +10,7 @@ func _ready() -> void:
    Layers[layer_name.to_upper()] = 1 << i
 
 var SelectedUnit = "selected-unit"
-const Groups := {"SelectedUnit": "selected-unit"}
+const Groups := {
+	"SelectedUnit": "selected-unit", 
+	"SelectedRoom": "selected-room",
+}
