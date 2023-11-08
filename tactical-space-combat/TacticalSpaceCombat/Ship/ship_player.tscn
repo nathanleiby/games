@@ -63,8 +63,6 @@ script = ExtResource("5_ox3vo")
 
 [node name="UnitPlayer" parent="Units" index="0" instance=ExtResource("6_cqr6a")]
 position = Vector2(160, 160)
-script = null
 
 [node name="UnitPlayer2" parent="Units" index="1" instance=ExtResource("6_cqr6a")]
 position = Vector2(288, 224)
-script = null
