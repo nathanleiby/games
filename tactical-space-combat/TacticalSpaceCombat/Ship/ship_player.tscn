@@ -7,9 +7,6 @@
 
 [node name="ShipPlayer" instance=ExtResource("1_um77c")]
 
-[node name="Rooms" parent="." index="0"]
-metadata/_edit_lock_ = true
-
 [node name="Room" parent="Rooms" index="0" instance=ExtResource("1_g6etn")]
 position = Vector2(352, 320)
 size = Vector2(3, 2)
@@ -27,7 +24,7 @@ position = Vector2(704, 480)
 size = Vector2(2, 1)
 
 [node name="Walls" parent="." index="1"]
-metadata/_edit_lock_ = true
+z_index = 1
 
 [node name="Wall" parent="Walls" index="0" instance=ExtResource("3_qe84m")]
 position = Vector2(256, 286.269)
@@ -43,7 +40,7 @@ position = Vector2(256, 256)
 points = PackedVector2Array(384, 192, 512, 192)
 
 [node name="Doors" parent="." index="2"]
-metadata/_edit_lock_ = true
+z_index = 2
 
 [node name="Door" parent="Doors" index="0" instance=ExtResource("4_dibip")]
 position = Vector2(448, 352)
