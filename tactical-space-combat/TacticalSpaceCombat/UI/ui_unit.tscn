@@ -1,0 +1,38 @@
+[gd_scene load_steps=2 format=3 uid="uid://ddv4lqj0jn6w0"]
+
+[ext_resource type="Texture2D" uid="uid://dwbw7psga3grw" path="res://TacticalSpaceCombat/Assets/Assets.svg" id="1_2kp0m"]
+
+[node name="UIUnit" type="ColorRect"]
+custom_minimum_size = Vector2(64, 64)
+color = Color(0.494118, 0.494118, 0.560784, 1)
+
+[node name="Icon" type="NinePatchRect" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -12.0
+offset_top = -16.0
+offset_right = 12.0
+offset_bottom = 16.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_2kp0m")
+region_rect = Rect2(64, 384, 24, 32)
+
+[node name="Feedback" type="NinePatchRect" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_2kp0m")
+region_rect = Rect2(2.08165e-12, 416, 32, 32)
+patch_margin_left = 8
+patch_margin_top = 8
+patch_margin_right = 8
+patch_margin_bottom = 8

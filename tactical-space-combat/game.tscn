@@ -1,0 +1,18 @@
+[gd_scene load_steps=2 format=3 uid="uid://2eqqyiwp1csn"]
+
+[ext_resource type="PackedScene" uid="uid://5smrfcw656jt" path="res://TacticalSpaceCombat/Ship/ship_player.tscn" id="1_pwp0x"]
+
+[node name="Game" type="Node2D"]
+
+[node name="ShipPlayer" parent="." instance=ExtResource("1_pwp0x")]
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Units" type="VBoxContainer" parent="Control"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
