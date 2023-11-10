@@ -29,7 +29,7 @@ const spawnWave = (
         timer.cancel();
 
         // wave complete
-        gameState.waveNumber += 1;
+        gameState.waveIdx += 1;
 
         return;
       }
@@ -89,10 +89,11 @@ export class LevelOne extends Scene {
     setupUI(game);
 
     this.startWave = () => {
-      const waveIdx = gameState.waveNumber - 1;
+      const { waveIdx } = gameState;
       if (waveIdx >= this.waves.length) {
-        gameState.levelNumber += 1;
-        gameState.waveNumber = 1;
+        console.log("level complete");
+        gameState.money += 25;
+        refreshUI();
         return;
       }
 

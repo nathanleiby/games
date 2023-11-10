@@ -2,7 +2,7 @@ import { Engine, Font, FontUnit, Label, vec } from "excalibur";
 import { gameState } from "./gamestate";
 
 const moneyLabel = new Label({
-  pos: vec(20, 20),
+  pos: vec(20, 30),
   font: new Font({
     family: "impact",
     size: 24,
@@ -11,7 +11,7 @@ const moneyLabel = new Label({
 });
 
 const baseHealthLabel = new Label({
-  pos: vec(20, 50),
+  pos: vec(20, 60),
   font: new Font({
     family: "impact",
     size: 24,
@@ -20,7 +20,7 @@ const baseHealthLabel = new Label({
 });
 
 const playerHealthLabel = new Label({
-  pos: vec(20, 80),
+  pos: vec(20, 90),
   font: new Font({
     family: "impact",
     size: 24,
@@ -29,7 +29,7 @@ const playerHealthLabel = new Label({
 });
 
 const levelLabel = new Label({
-  pos: vec(300, 40),
+  pos: vec(300, 50),
   font: new Font({
     family: "impact",
     size: 48,
@@ -51,7 +51,7 @@ export const refreshUI = () => {
   baseHealthLabel.text = `Base Health: ${gameState.baseHealth}`;
   playerHealthLabel.text = `Player Health: ${gameState.playerHealth}`;
   levelLabel.text = `Level ${gameState.levelNumber}`;
-  waveLabel.text = `Wave ${gameState.waveNumber}`;
+  waveLabel.text = `Wave ${gameState.waveIdx + 1}`;
 };
 
 export const setupUI = (game: Engine) => {

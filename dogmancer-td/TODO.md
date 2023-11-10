@@ -30,9 +30,9 @@
     - [ ] have timer to enter combat phase
       - [ ] (press button) to start earlier
     - [..] spawn enemies
-    - [ ] show progress toward Nth wave
-  - [ ] between waves
-    - [ ] choose upgrades (drafted)
+    - [..] show progress toward Nth wave
+  - [ ] levels
+    - [ ] on level win, choose upgrades (rogue-like)
 - [ ] mvp multiplayer .. 2nd hero and control it
 - [ ] full game structure
   - [ ] home screen (new game, settings)
