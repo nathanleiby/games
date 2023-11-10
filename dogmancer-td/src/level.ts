@@ -7,12 +7,55 @@ import {
   Timer,
   vec,
 } from "excalibur";
-import { Enemy } from "./enemy";
+import { Enemy, EnemyType } from "./enemy";
+import { gameState } from "./gamestate";
 import { HEIGHT, TAGS, WIDTH } from "./globals";
 import { Player } from "./player";
-import { setupUI } from "./ui";
+import { refreshUI, setupUI } from "./ui";
+
+const spawnWave = (
+  enemyCount: number,
+  base: Actor,
+  game: Engine,
+  enemyType: EnemyType,
+  spawnIntervalMs: number = 1000
+) => {
+  let timerIters = 0;
+  const timer = new Timer({
+    fcn: () => {
+      // check if complete
+      timerIters += 1;
+      if (timerIters > enemyCount) {
+        timer.cancel();
+
+        // wave complete
+        gameState.waveNumber += 1;
+
+        return;
+      }
+
+      // spawn an enemy
+      const enemy = new Enemy(vec(300, 300), enemyType);
+      game.add(enemy);
+
+      // setup enemy pathfinding
+      enemy.actions.moveTo(base.transform.pos, 50);
+    },
+    repeats: true,
+    interval: spawnIntervalMs,
+  });
+  game.add(timer);
+  timer.start();
+};
+
+type WaveConfig = [number, EnemyType];
 
 export class LevelOne extends Scene {
+  waves: WaveConfig[] = [
+    [5, EnemyType.Basic],
+    [3, EnemyType.Strong],
+  ];
+
   onInitialize(game: Engine): void {
     const player = new Player(vec(200, 200));
 
@@ -43,31 +86,25 @@ export class LevelOne extends Scene {
     game.add(wall);
     game.add(base);
 
-    this.startWave = () => {
-      let timerIters = 0;
-      const timer = new Timer({
-        fcn: () => {
-          timerIters += 1;
-          if (timerIters > 10) {
-            timer.cancel();
-            return;
-          }
-          const enemy = new Enemy(vec(300, 300));
-          game.add(enemy);
-          enemy.actions.moveTo(base.transform.pos, 50);
-        },
-        repeats: true,
-        interval: 2000,
-      });
-      game.add(timer);
-      timer.start();
-    };
-
     setupUI(game);
+
+    this.startWave = () => {
+      const waveIdx = gameState.waveNumber - 1;
+      if (waveIdx >= this.waves.length) {
+        gameState.levelNumber += 1;
+        gameState.waveNumber = 1;
+        return;
+      }
+
+      const count = this.waves[waveIdx][0];
+      const enemyType = this.waves[waveIdx][1];
+      spawnWave(count, base, game, enemyType);
+
+      refreshUI();
+    };
   }
 
   startWave() {
-    // we override in onInitialize, so we can make a closure with needed game refs
-    throw "startWave not set";
+    throw "todo";
   }
 }

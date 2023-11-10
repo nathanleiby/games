@@ -2,14 +2,19 @@ import { Actor, CollisionType, Color, Engine, Vector } from "excalibur";
 import { gameState } from "./gamestate";
 import { refreshUI } from "./ui";
 
+export enum EnemyType {
+  Basic = "basic",
+  Strong = "strong",
+}
+
 export class Enemy extends Actor {
-  constructor(position: Vector) {
+  constructor(position: Vector, enemyType: EnemyType = EnemyType.Basic) {
     const { x, y } = position;
     super({
       x,
       y,
       radius: 10,
-      color: Color.Red,
+      color: enemyType === EnemyType.Basic ? Color.Red : Color.Orange,
       collisionType: CollisionType.Fixed,
     });
   }
