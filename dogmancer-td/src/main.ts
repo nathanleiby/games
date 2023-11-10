@@ -2,7 +2,8 @@ import { gameState } from "./gamestate";
 import "./style.css";
 
 // ES style import from excalibur
-import { Actor, CollisionType, Color, Engine, Input } from "excalibur";
+import { Actor, CollisionType, Color, Engine, vec } from "excalibur";
+import { Player } from "./player";
 import { refreshUI, setupUI } from "./ui";
 
 const WIDTH = 800;
@@ -17,16 +18,7 @@ const game = new Engine({
   // displayMode: DisplayMode.FitScreen,
 });
 
-// ---
-
-const player = new Actor({
-  x: 100,
-  y: 300,
-  radius: 20,
-  // Set the color
-  color: Color.Green,
-  collisionType: CollisionType.Active,
-});
+const player = new Player(vec(200, 200));
 
 const enemy = new Actor({
   x: 300,
@@ -85,66 +77,7 @@ enemy.on("collisionstart", (e) => {
   }
 });
 
-game.onPreUpdate = (engine, _delta) => {
-  player.vel.x = 0;
-  player.vel.y = 0;
-
-  // Player input
-  if (
-    engine.input.keyboard.isHeld(Input.Keys.Left) ||
-    engine.input.keyboard.isHeld(Input.Keys.A)
-  ) {
-    player.vel.x = -150;
-  }
-
-  if (
-    engine.input.keyboard.isHeld(Input.Keys.Right) ||
-    engine.input.keyboard.isHeld(Input.Keys.D)
-  ) {
-    player.vel.x = 150;
-  }
-  if (
-    engine.input.keyboard.isHeld(Input.Keys.Up) ||
-    engine.input.keyboard.isHeld(Input.Keys.W)
-  ) {
-    player.vel.y = -150;
-  }
-
-  if (
-    engine.input.keyboard.isHeld(Input.Keys.Down) ||
-    engine.input.keyboard.isHeld(Input.Keys.S)
-  ) {
-    player.vel.y = 150;
-  }
-
-  if (engine.input.keyboard.wasPressed(Input.Keys.B)) {
-    const COST = 1;
-    if (gameState.money < COST) {
-      return;
-    }
-
-    // pay
-    gameState.money -= COST;
-    refreshUI();
-
-    // build
-    const x = player.transform.pos.x + 30;
-    const y = player.transform.pos.y + 30;
-    const tower = new Actor({
-      x,
-      y,
-
-      width: 20,
-      height: 20,
-
-      // Set the color
-      color: Color.Green.lighten(0.5),
-      collisionType: CollisionType.Fixed,
-    });
-
-    game.add(tower);
-  }
-};
+// game.onPreUpdate = (engine, _delta) => {};
 
 setupUI(game);
 

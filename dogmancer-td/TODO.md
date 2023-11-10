@@ -3,7 +3,7 @@ Game implementation
 - [ ] game map
   - [ ] simple obstacles
 - [ ] tower
-  - [ ] place a tower
+  - [x] place a tower
   - [ ] verify legal build position
   - [ ] preview build position, then confirm
 - [x] base
@@ -15,7 +15,7 @@ Game implementation
   - [x] action: build tower
   - [ ] action: attack
 - [ ] economy
-  - [ ] spend money to build tower
+  - [x] spend money to build tower
 - [ ] game loop
   - [ ] wave
     - [ ] build phase vs combat phase
@@ -41,4 +41,5 @@ Game implementation
 Other
 
 - how best to propagate state (e.g. spent 1 coin, change gameState and UI label text)?
+  - For now, (1) creating a global gamestate (2) adding a hook to fully refresh UI as needed when gameState changes
 - `Uncaught SyntaxError: The requested module '/node_modules/.vite/deps/excalibur.js?v=6db1205f' does not provide an export named 'default'` .. can I use `ex.Foo` syntax or deprecated?
