@@ -1,5 +1,6 @@
 import { Actor, CollisionType, Color, Engine, Input, Vector } from "excalibur";
 import { gameState } from "./gamestate";
+import { TAGS } from "./globals";
 import { refreshUI } from "./ui";
 
 export class Player extends Actor {
@@ -13,6 +14,9 @@ export class Player extends Actor {
       color: Color.Green,
       collisionType: CollisionType.Active,
     });
+  }
+  onInitialize(_engine: Engine): void {
+    this.addTag(TAGS.PLAYER);
   }
 
   onPreUpdate(engine: Engine, _delta: number): void {

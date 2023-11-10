@@ -4,6 +4,7 @@ Game implementation
   - [ ] simple obstacles
 - [ ] tower
   - [x] place a tower
+  - [ ] tear down a built tower
   - [ ] verify legal build position
   - [ ] preview build position, then confirm
 - [x] base
@@ -37,9 +38,13 @@ Game implementation
       - [ ] celebration screen
       - [ ] save record of run
     - [ ] lose
+- [ ] Productivity
+  - [ ] Simplify creation of levels
+  - [ ] (fun) Procedurally generate levels
 
 Other
 
 - how best to propagate state (e.g. spent 1 coin, change gameState and UI label text)?
   - For now, (1) creating a global gamestate (2) adding a hook to fully refresh UI as needed when gameState changes
+  - Could build UI layer in react/etc and update that state, but that seems like overkill for now
 - `Uncaught SyntaxError: The requested module '/node_modules/.vite/deps/excalibur.js?v=6db1205f' does not provide an export named 'default'` .. can I use `ex.Foo` syntax or deprecated?
