@@ -1,27 +1,35 @@
-Game implementation
+# TODOs
+
+## Game Implementation
 
 - [ ] game map
-  - [ ] simple obstacles
+  - [..] simple obstacles
 - [ ] tower
   - [x] place a tower
   - [ ] tear down a built tower
   - [ ] verify legal build position
   - [ ] preview build position, then confirm
+  - [ ] attack enemy
+  - [ ] die to enemy(?)
 - [x] base
 - [x] enemy
-  - [ ] hard coded path
+  - [..] hard coded path
   - [ ] pathfind to base
+  - [ ] stats: health, damage
 - [x] hero
   - [x] action: movement
   - [x] action: build tower
   - [ ] action: attack
 - [ ] economy
   - [x] spend money to build tower
+  - [x] gain money when defeat an enemy
+  - [ ] gain money when win a wave
 - [ ] game loop
-  - [ ] wave
+  - [..] wave
     - [ ] build phase vs combat phase
-    - [ ] spawn enemies
-    - [ ] earn $ (defeating enemies or completing wave)
+    - [ ] have timer to enter combat phase
+      - [ ] (press button) to start earlier
+    - [..] spawn enemies
     - [ ] show progress toward Nth wave
   - [ ] between waves
     - [ ] choose upgrades (drafted)
@@ -38,11 +46,18 @@ Game implementation
       - [ ] celebration screen
       - [ ] save record of run
     - [ ] lose
-- [ ] Productivity
-  - [ ] Simplify creation of levels
-  - [ ] (fun) Procedurally generate levels
 
-Other
+## Player experience
+
+- [ ] spawn enemies where they cannot immediately be killed
+- [ ] deal with collisions between enemies?
+
+## Productivity
+
+- [ ] Simplify creation of levels .. use tiled editor and import? level data file?
+- [ ] (fun) Procedurally generate levels
+
+## Other
 
 - how best to propagate state (e.g. spent 1 coin, change gameState and UI label text)?
   - For now, (1) creating a global gamestate (2) adding a hook to fully refresh UI as needed when gameState changes

@@ -29,3 +29,4 @@ game.addScene("l1", l1);
 
 game.goToScene("l1");
 game.start();
+l1.startWave();

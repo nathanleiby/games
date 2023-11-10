@@ -20,6 +20,10 @@ export class Enemy extends Actor {
         // player kills enemy, but takes 1 damage
         gameState.playerHealth -= 1;
         e.actor.kill();
+
+        // earn money for killing enemy
+        gameState.money += 1;
+
         refreshUI();
       }
 
@@ -27,8 +31,11 @@ export class Enemy extends Actor {
         // enemy damages base, then dies
         gameState.baseHealth -= 1;
         e.actor.kill();
-        refreshUI();
+
+        // a lil juice
         engine.currentScene.camera.shake(2, 2, 100);
+
+        refreshUI();
       }
     });
   }
