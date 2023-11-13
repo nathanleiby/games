@@ -1,4 +1,13 @@
-import { Actor, CollisionType, Color, Engine } from "excalibur";
+import {
+  Actor,
+  CollisionType,
+  Color,
+  Engine,
+  Font,
+  FontUnit,
+  Label,
+  vec,
+} from "excalibur";
 import {
   FLOOR_HEIGHT,
   GROUND_HEIGHT,
@@ -42,6 +51,17 @@ const wall = new Actor({
 });
 
 game.add(wall);
+
+const sheepCountLabel = new Label({
+  text: "Sheep: 0",
+  pos: vec(20, 30),
+  font: new Font({
+    family: "impact",
+    size: 24,
+    unit: FontUnit.Px,
+  }),
+});
+game.add(sheepCountLabel);
 
 // Actors
 const sheep = new Sheep({ x: 64, y: FLOOR_HEIGHT });

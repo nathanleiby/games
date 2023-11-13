@@ -9,11 +9,12 @@ import {
   Timer,
   vec,
 } from "excalibur";
-import { FLOOR_HEIGHT } from "./config";
+import { FINISH_LINE_WIDTH, FLOOR_HEIGHT } from "./config";
 import { spriteSheet } from "./loader";
 
 export class Sheep extends Actor {
   jumpTimer?: Timer;
+  didCrossFinishLine: boolean = false;
 
   constructor(props: { x: number; y: number }) {
     const { x, y } = props;
@@ -76,6 +77,17 @@ export class Sheep extends Actor {
   }
 
   onPreUpdate(engine: Engine, _delta: number): void {
+    if (this.didCrossFinishLine) {
+      // done!
+      return;
+    }
+
+    if (this.pos.x >= FINISH_LINE_WIDTH) {
+      this.vel = vec(0, 0);
+      this.didCrossFinishLine = true;
+      return;
+    }
+
     if (engine.input.keyboard.wasPressed(Keys.Space)) {
       this.jump();
     }

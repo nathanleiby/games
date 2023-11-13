@@ -10,7 +10,7 @@
   - [ ] Sheep reaches destination? +1 sheep count
   - [ ] end game condition
     - [ ] press "go to sleep" button
-    - [ ] reach 50 sheep
+    - [ ] reach N sheep
     - [ ] fade screen
 - [ ] Art
   - [ ] Add music
