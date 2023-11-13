@@ -12,7 +12,7 @@ import {
 } from "excalibur";
 import { FINISH_LINE_WIDTH, FLOOR_HEIGHT } from "./config";
 import { gameState, incrementSheepCounted } from "./gameState";
-import { spriteSheet } from "./loader";
+import { Sounds, spriteSheet } from "./loader";
 import { refreshUI } from "./ui";
 
 const WALK_VEL = vec(50, 0);
@@ -82,6 +82,9 @@ export class Sheep extends Actor {
       // change x direction
       this.walkDirection *= -1;
       this.vel.x = WALK_VEL.x * this.walkDirection;
+
+      // TODO: better collide
+      //   Sounds.select.play(0.05);
     });
 
     gameState.activeSheep += 1;
@@ -113,6 +116,7 @@ export class Sheep extends Actor {
     if (this.pos.x >= FINISH_LINE_WIDTH) {
       this.didCrossFinishLine = true;
       incrementSheepCounted();
+      Sounds.coin.play(0.2);
       refreshUI();
       this.actions.fade(0, 500).die();
       return;
@@ -120,6 +124,7 @@ export class Sheep extends Actor {
 
     if (engine.input.keyboard.wasPressed(Keys.Space)) {
       this.jump();
+      Sounds.jump.play(0.1);
     }
   }
 }

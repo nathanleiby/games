@@ -7,6 +7,7 @@ import {
   SCREEN_HEIGHT,
 } from "./config";
 import { gameState } from "./gameState";
+import { Sounds } from "./loader";
 import { Sheep } from "./sheep";
 import "./style.css";
 import { sheepCountLabel, sleepyOverlay, zzzLabel } from "./ui";
@@ -86,5 +87,7 @@ export class Level extends Scene {
     // get sleepier..
     game.add(sleepyOverlay);
     game.add(zzzLabel);
+
+    Sounds.music.play(0.2);
   }
 }
