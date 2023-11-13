@@ -75,8 +75,7 @@ export class Sheep extends Actor {
       if (this.didCrossFinishLine) return;
 
       // if on top of the fence, don't change direction
-      if (event.other.hasTag("fence") && this.pos.y === 416) {
-        // don't change direct
+      if (event.other.hasTag("fence") && this.pos.y <= 416) {
         return;
       }
 
@@ -95,7 +94,7 @@ export class Sheep extends Actor {
   private jump() {
     // if is on ground
     if (this.pos.y >= FLOOR_HEIGHT && !this.isJumping) {
-      this.vel.y = -400;
+      this.vel.y = -350;
       this.vel.x *= 1.1;
 
       this.isJumping = true;
