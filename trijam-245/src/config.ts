@@ -3,5 +3,7 @@ export const SCREEN_HEIGHT = 600;
 
 export const GROUND_HEIGHT = 128;
 export const FLOOR_HEIGHT = SCREEN_HEIGHT - GROUND_HEIGHT / 2;
+export const FENCE_HEIGHT = 128;
+export const ON_TOP_OF_FENCE_HEIGHT = 416;
 
 export const FINISH_LINE_WIDTH = 650;

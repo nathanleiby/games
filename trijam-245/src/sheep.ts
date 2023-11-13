@@ -12,9 +12,12 @@ import {
 import { FINISH_LINE_WIDTH, FLOOR_HEIGHT } from "./config";
 import { spriteSheet } from "./loader";
 
+const WALK_VEL = vec(50, 0);
+
 export class Sheep extends Actor {
   jumpTimer?: Timer;
   didCrossFinishLine: boolean = false;
+  walkDirection: number = 1;
 
   constructor(props: { x: number; y: number }) {
     const { x, y } = props;
@@ -24,7 +27,7 @@ export class Sheep extends Actor {
   public onInitialize(_engine: Engine) {
     const sprite = spriteSheet.sprites[0];
 
-    this.vel = vec(50, 0);
+    this.vel = WALK_VEL;
 
     // display the collide
     const rect = new Rectangle({
@@ -50,7 +53,6 @@ export class Sheep extends Actor {
     this.jumpTimer = new Timer({
       interval: 10,
       fcn: () => {
-        console.log("fcn");
         this.vel.y += 5;
         if (this.pos.y >= FLOOR_HEIGHT) {
           this.pos.y = FLOOR_HEIGHT;
@@ -63,6 +65,20 @@ export class Sheep extends Actor {
     });
 
     _engine.add(this.jumpTimer);
+
+    this.on("collisionstart", (event) => {
+      if (this.didCrossFinishLine) return;
+
+      // if on top of the fence, don't change direction
+      if (event.other.hasTag("fence") && this.pos.y === 416) {
+        // don't change direct
+        return;
+      }
+
+      // change x direction
+      this.walkDirection *= -1;
+      this.vel.x = WALK_VEL.x * this.walkDirection;
+    });
   }
 
   private jump() {
@@ -77,6 +93,23 @@ export class Sheep extends Actor {
   }
 
   onPreUpdate(engine: Engine, _delta: number): void {
+    if (this.didCrossFinishLine) {
+      // done!
+      return;
+    }
+
+    if (this.pos.x >= FINISH_LINE_WIDTH) {
+      this.vel = vec(0, 0);
+      this.didCrossFinishLine = true;
+      return;
+    }
+
+    if (engine.input.keyboard.wasPressed(Keys.Space)) {
+      this.jump();
+    }
+  }
+
+  onPostUpdate(engine: Engine, _delta: number): void {
     if (this.didCrossFinishLine) {
       // done!
       return;

@@ -9,6 +9,7 @@ import {
   vec,
 } from "excalibur";
 import {
+  FENCE_HEIGHT,
   FLOOR_HEIGHT,
   GROUND_HEIGHT,
   SCREEN_HEIGHT,
@@ -38,19 +39,31 @@ const ground = new Actor({
   width: 800,
   height: GROUND_HEIGHT,
   color: Color.fromRGB(30, 160, 30),
+  collisionType: CollisionType.PreventCollision,
 });
 game.add(ground);
 
-const wall = new Actor({
-  x: 384,
-  y: FLOOR_HEIGHT - 32,
+const leftWall = new Actor({
+  x: -8,
+  y: SCREEN_HEIGHT - 128,
   width: 16,
-  height: 128,
+  height: 256,
   color: Color.fromRGB(160, 100, 100),
   collisionType: CollisionType.Fixed,
 });
 
-game.add(wall);
+game.add(leftWall);
+
+const fence = new Actor({
+  x: 384,
+  y: FLOOR_HEIGHT - 32,
+  width: 16,
+  height: FENCE_HEIGHT,
+  color: Color.fromRGB(160, 100, 100),
+  collisionType: CollisionType.Fixed,
+});
+fence.addTag("fence");
+game.add(fence);
 
 const sheepCountLabel = new Label({
   text: "Sheep: 0",
