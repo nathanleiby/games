@@ -2,11 +2,16 @@
 
 ## Tasks
 
-- [ ] Add a sheep
-- [ ] Add a wall
-- [ ] Sheep moves right
-- [ ] Spacebar to jump
-- [ ] Sheep reaches destination? +1 sheep
+- [ ] Core game loop
+  - [x] Add a sheep
+  - [ ] Add a wall
+  - [..] Sheep moves right
+  - [x] Spacebar to jump
+  - [ ] Sheep reaches destination? +1 sheep count
+  - [ ] end game condition
+    - [ ] press "go to sleep" button
+    - [ ] reach 50 sheep
+    - [ ] fade screen
 - [ ] Art
   - [ ] Add music
     - https://opengameart.org/content/a-lucid-dream
@@ -19,7 +24,9 @@
     - [ ] on cross finish line
     - [ ] on end game ..
       - https://opengameart.org/content/sleep-inn
-  - [ ] Add background
+  - [ ] Add background -- frame in sleep dreamy ness
+  - [ ] Add start game screen
+    - [ ] MVP: Excalibur play
 
 ## Things to try:
 
