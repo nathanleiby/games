@@ -6,11 +6,12 @@ import {
   GraphicsGroup,
   Keys,
   Rectangle,
+  Scene,
   Timer,
   vec,
 } from "excalibur";
 import { FINISH_LINE_WIDTH, FLOOR_HEIGHT } from "./config";
-import { incrementSheepCounted } from "./gameState";
+import { gameState, incrementSheepCounted } from "./gameState";
 import { spriteSheet } from "./loader";
 import { refreshUI } from "./ui";
 
@@ -18,6 +19,7 @@ const WALK_VEL = vec(50, 0);
 
 export class Sheep extends Actor {
   jumpTimer?: Timer;
+  isJumping: boolean = false;
   didCrossFinishLine: boolean = false;
   walkDirection: number = 1;
 
@@ -59,6 +61,7 @@ export class Sheep extends Actor {
         if (this.pos.y >= FLOOR_HEIGHT) {
           this.pos.y = FLOOR_HEIGHT;
           this.vel.y = 0;
+          this.isJumping = false;
           this.jumpTimer?.stop();
           return;
         }
@@ -81,14 +84,21 @@ export class Sheep extends Actor {
       this.walkDirection *= -1;
       this.vel.x = WALK_VEL.x * this.walkDirection;
     });
+
+    gameState.activeSheep += 1;
+  }
+
+  onPreKill(_scene: Scene<unknown>): void {
+    gameState.activeSheep -= 1;
   }
 
   private jump() {
     // if is on ground
-    if (this.pos.y === FLOOR_HEIGHT) {
+    if (this.pos.y >= FLOOR_HEIGHT && !this.isJumping) {
       this.vel.y = -400;
       this.vel.x *= 1.1;
 
+      this.isJumping = true;
       this.jumpTimer?.start();
     }
 

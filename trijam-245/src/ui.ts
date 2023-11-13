@@ -1,5 +1,5 @@
 import { Font, FontUnit, Label, vec } from "excalibur";
-import { getSheepCounted } from "./gameState";
+import { gameState } from "./gameState";
 
 export const sheepCountLabel = new Label({
   text: "Sheep: 0",
@@ -12,5 +12,5 @@ export const sheepCountLabel = new Label({
 });
 
 export function refreshUI() {
-  sheepCountLabel.text = `Sheep: ${getSheepCounted()}`;
+  sheepCountLabel.text = `Sheep: ${gameState.sheepCounted}`;
 }

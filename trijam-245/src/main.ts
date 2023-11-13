@@ -1,4 +1,4 @@
-import { Actor, CollisionType, Color, Engine } from "excalibur";
+import { Actor, CollisionType, Color, Engine, Timer } from "excalibur";
 import {
   FENCE_HEIGHT,
   FLOOR_HEIGHT,
@@ -6,6 +6,7 @@ import {
   SCREEN_HEIGHT,
   SCREEN_WIDTH,
 } from "./config";
+import { gameState } from "./gameState";
 import { loader } from "./loader";
 import { Sheep } from "./sheep";
 import "./style.css";
@@ -35,11 +36,22 @@ const ground = new Actor({
 });
 game.add(ground);
 
+const invisibleFloor = new Actor({
+  x: 400,
+  y: 600 - 64 + 32,
+  width: 800,
+  height: 1,
+  color: Color.Red,
+  visible: false,
+  collisionType: CollisionType.Fixed,
+});
+game.add(invisibleFloor);
+
 const leftWall = new Actor({
   x: -8,
-  y: SCREEN_HEIGHT - 128,
+  y: SCREEN_HEIGHT - 2,
   width: 16,
-  height: 256,
+  height: SCREEN_HEIGHT,
   color: Color.fromRGB(160, 100, 100),
   collisionType: CollisionType.Fixed,
 });
@@ -60,11 +72,26 @@ game.add(fence);
 game.add(sheepCountLabel);
 
 // Actors
-const sheep = new Sheep({ x: 64, y: FLOOR_HEIGHT });
-game.add(sheep);
-const sheep2 = new Sheep({ x: 128, y: FLOOR_HEIGHT });
-game.add(sheep2);
-
 game.onPreUpdate = (_engine, _delta) => {};
 
+const spawnSheep = () => {
+  const sheep = new Sheep({ x: 64, y: FLOOR_HEIGHT });
+  game.add(sheep);
+};
+
+const spawnTimer = new Timer({
+  interval: 3000,
+  fcn: () => {
+    if (gameState.activeSheep <= 3) {
+      spawnSheep();
+    }
+  },
+  repeats: true,
+});
+game.add(spawnTimer);
+
 game.start(loader);
+
+// gameplay
+spawnTimer.start();
+spawnSheep();
