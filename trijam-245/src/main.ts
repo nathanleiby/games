@@ -21,3 +21,9 @@ game.start(loader);
 
 game.addScene("level", level);
 game.goToScene("level");
+
+// https://excaliburjs.com/docs/hosting/#itchio
+game.start().then(() => {
+  // Grab the frame's focus
+  window.focus();
+});
