@@ -3,12 +3,13 @@ import {
   FENCE_HEIGHT,
   FLOOR_HEIGHT,
   GROUND_HEIGHT,
+  MAX_SHEEP,
   SCREEN_HEIGHT,
 } from "./config";
 import { gameState } from "./gameState";
 import { Sheep } from "./sheep";
 import "./style.css";
-import { sheepCountLabel } from "./ui";
+import { sheepCountLabel, sleepyOverlay, zzzLabel } from "./ui";
 
 export class Level extends Scene {
   onInitialize(game: Engine): void {
@@ -67,7 +68,10 @@ export class Level extends Scene {
     const spawnTimer = new Timer({
       interval: 3000,
       fcn: () => {
-        if (gameState.activeSheep <= 3) {
+        if (
+          gameState.activeSheep <= 3 &&
+          gameState.sheepCounted + gameState.activeSheep < MAX_SHEEP
+        ) {
           spawnSheep();
         }
       },
@@ -78,5 +82,9 @@ export class Level extends Scene {
     // gameplay
     spawnTimer.start();
     spawnSheep();
+
+    // get sleepier..
+    game.add(sleepyOverlay);
+    game.add(zzzLabel);
   }
 }

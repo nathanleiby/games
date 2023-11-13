@@ -1,4 +1,13 @@
-import { Font, FontUnit, Label, vec } from "excalibur";
+import {
+  Actor,
+  CollisionType,
+  Color,
+  Font,
+  FontUnit,
+  Label,
+  vec,
+} from "excalibur";
+import { MAX_SHEEP, SCREEN_HEIGHT, SCREEN_WIDTH } from "./config";
 import { gameState } from "./gameState";
 
 export const sheepCountLabel = new Label({
@@ -11,6 +20,36 @@ export const sheepCountLabel = new Label({
   }),
 });
 
+export const sleepyOverlay = new Actor({
+  x: SCREEN_WIDTH / 2,
+  y: SCREEN_HEIGHT / 2,
+  width: SCREEN_WIDTH,
+  height: SCREEN_HEIGHT,
+  color: new Color(0, 0, 0, 0), // alpha overlay
+  collisionType: CollisionType.PreventCollision,
+});
+
+export const zzzLabel = new Label({
+  text: "",
+  pos: vec(SCREEN_WIDTH / 2 - 130, SCREEN_HEIGHT / 2),
+  font: new Font({
+    family: "impact",
+    size: 140,
+    unit: FontUnit.Px,
+    color: Color.White,
+  }),
+  // visible: false, // TODO: toggling visible not working
+});
+
 export function refreshUI() {
   sheepCountLabel.text = `Sheep: ${gameState.sheepCounted}`;
+  sleepyOverlay.color = new Color(
+    0,
+    0,
+    0,
+    (gameState.sheepCounted / MAX_SHEEP) * 0.8
+  );
+  if (gameState.sheepCounted >= MAX_SHEEP) {
+    zzzLabel.text = "Zzz...";
+  }
 }

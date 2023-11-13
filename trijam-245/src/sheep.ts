@@ -111,28 +111,10 @@ export class Sheep extends Actor {
     }
 
     if (this.pos.x >= FINISH_LINE_WIDTH) {
-      this.vel = vec(0, 0);
       this.didCrossFinishLine = true;
       incrementSheepCounted();
       refreshUI();
-      this.kill();
-      return;
-    }
-
-    if (engine.input.keyboard.wasPressed(Keys.Space)) {
-      this.jump();
-    }
-  }
-
-  onPostUpdate(engine: Engine, _delta: number): void {
-    if (this.didCrossFinishLine) {
-      // done!
-      return;
-    }
-
-    if (this.pos.x >= FINISH_LINE_WIDTH) {
-      this.vel = vec(0, 0);
-      this.didCrossFinishLine = true;
+      this.actions.fade(0, 500).die();
       return;
     }
 
