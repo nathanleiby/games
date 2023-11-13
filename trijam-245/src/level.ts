@@ -8,9 +8,9 @@ import {
 } from "./config";
 import { gameState } from "./gameState";
 import { Sounds } from "./loader";
-import { Sheep } from "./sheep";
+import { Sheep, SheepVariety } from "./sheep";
 import "./style.css";
-import { sheepCountLabel, sleepyOverlay, zzzLabel } from "./ui";
+import { sheepCountLabel, sleepyOverlay, zzzLabel, zzzLabel2 } from "./ui";
 
 export class Level extends Scene {
   onInitialize(game: Engine): void {
@@ -62,7 +62,16 @@ export class Level extends Scene {
 
     // Actors
     const spawnSheep = () => {
-      const sheep = new Sheep({ x: 64, y: FLOOR_HEIGHT });
+      const sheep = new Sheep({
+        x: 64,
+        y: FLOOR_HEIGHT,
+        variety:
+          gameState.sheepCounted < 1
+            ? SheepVariety.White
+            : Math.random() < 0.8
+            ? SheepVariety.White
+            : SheepVariety.Black,
+      });
       game.add(sheep);
     };
 
@@ -87,6 +96,7 @@ export class Level extends Scene {
     // get sleepier..
     game.add(sleepyOverlay);
     game.add(zzzLabel);
+    game.add(zzzLabel2);
 
     Sounds.music.play(0.2);
   }

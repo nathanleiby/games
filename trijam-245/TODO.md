@@ -16,7 +16,7 @@
   - [ ] variety of sheep types
   - [ ] tune spawn timing
 - [ ] Art
-  - [ ] Add music
+  - [x] Add music
     - https://opengameart.org/content/a-lucid-dream
     - https://opengameart.org/content/sleep-hypnosis
     - https://opengameart.org/content/dream-2
@@ -27,6 +27,7 @@
     - [ ] on cross finish line
     - [ ] on end game ..
       - https://opengameart.org/content/sleep-inn
+  - [ ] Use left and right facing image for sheep
   - [ ] Add background -- frame in sleep dreamy ness
   - [ ] Add start game screen
     - [ ] MVP: Excalibur play
@@ -34,6 +35,8 @@
 ## Bugs
 
 - [x] 2 stacked ship on finish line start sinking :D -> this.kill()
+- [ ] Sheep can get stuck and stop moving
+- [ ] Can prevent game from being finishable, since we stop spawning more sheep
 
 ## Things to try:
 

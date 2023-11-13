@@ -17,15 +17,22 @@ import { refreshUI } from "./ui";
 
 const WALK_VEL = vec(50, 0);
 
+export enum SheepVariety {
+  White,
+  Black,
+}
+
 export class Sheep extends Actor {
   jumpTimer?: Timer;
   isJumping: boolean = false;
   didCrossFinishLine: boolean = false;
   walkDirection: number = 1;
+  variety: SheepVariety = SheepVariety.White;
 
-  constructor(props: { x: number; y: number }) {
-    const { x, y } = props;
+  constructor(props: { x: number; y: number; variety: SheepVariety }) {
+    const { x, y, variety } = props;
     super({ x, y, width: 48, height: 48, collisionType: CollisionType.Active });
+    this.variety = variety;
   }
 
   public onInitialize(_engine: Engine) {
@@ -37,7 +44,7 @@ export class Sheep extends Actor {
     const rect = new Rectangle({
       width: this.width,
       height: this.height,
-      color: Color.Green,
+      color: this.variety === SheepVariety.Black ? Color.Black : Color.White,
     });
     const group = new GraphicsGroup({
       members: [
@@ -97,7 +104,11 @@ export class Sheep extends Actor {
   private jump() {
     // if is on ground
     if (this.pos.y >= FLOOR_HEIGHT && !this.isJumping) {
-      this.vel.y = -350;
+      if (this.variety === SheepVariety.Black) {
+        this.vel.y = -500; // big jump for funz
+      } else {
+        this.vel.y = -350;
+      }
       this.vel.x *= 1.1;
 
       this.isJumping = true;

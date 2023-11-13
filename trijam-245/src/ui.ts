@@ -30,11 +30,22 @@ export const sleepyOverlay = new Actor({
 });
 
 export const zzzLabel = new Label({
-  text: "",
+  // text: "Zzz...",
   pos: vec(SCREEN_WIDTH / 2 - 130, SCREEN_HEIGHT / 2),
   font: new Font({
     family: "impact",
     size: 140,
+    unit: FontUnit.Px,
+    color: Color.White,
+  }),
+  // visible: false, // TODO: toggling visible not working
+});
+export const zzzLabel2 = new Label({
+  // text: "(gg)",
+  pos: vec(SCREEN_WIDTH / 2 - 50, SCREEN_HEIGHT / 2 + 80),
+  font: new Font({
+    family: "impact",
+    size: 40,
     unit: FontUnit.Px,
     color: Color.White,
   }),
@@ -51,5 +62,6 @@ export function refreshUI() {
   );
   if (gameState.sheepCounted >= MAX_SHEEP) {
     zzzLabel.text = "Zzz...";
+    zzzLabel2.text = "(gg)";
   }
 }
