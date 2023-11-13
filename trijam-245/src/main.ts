@@ -1,13 +1,4 @@
-import {
-  Actor,
-  CollisionType,
-  Color,
-  Engine,
-  Font,
-  FontUnit,
-  Label,
-  vec,
-} from "excalibur";
+import { Actor, CollisionType, Color, Engine } from "excalibur";
 import {
   FENCE_HEIGHT,
   FLOOR_HEIGHT,
@@ -18,6 +9,7 @@ import {
 import { loader } from "./loader";
 import { Sheep } from "./sheep";
 import "./style.css";
+import { sheepCountLabel } from "./ui";
 
 const game = new Engine({
   width: SCREEN_WIDTH,
@@ -65,15 +57,6 @@ const fence = new Actor({
 fence.addTag("fence");
 game.add(fence);
 
-const sheepCountLabel = new Label({
-  text: "Sheep: 0",
-  pos: vec(20, 30),
-  font: new Font({
-    family: "impact",
-    size: 24,
-    unit: FontUnit.Px,
-  }),
-});
 game.add(sheepCountLabel);
 
 // Actors

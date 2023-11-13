@@ -4,14 +4,17 @@
 
 - [ ] Core game loop
   - [x] Add a sheep
-  - [ ] Add a wall
-  - [..] Sheep moves right
+  - [x] Add a wall
+  - [x] Sheep moves right
   - [x] Spacebar to jump
-  - [ ] Sheep reaches destination? +1 sheep count
+  - [x] Sheep reaches destination? +1 sheep count
   - [ ] end game condition
     - [ ] press "go to sleep" button
     - [ ] reach N sheep
     - [ ] fade screen
+- [ ] improve gameplay
+  - [ ] variety of sheep types
+  - [ ] tune spawn timing
 - [ ] Art
   - [ ] Add music
     - https://opengameart.org/content/a-lucid-dream
@@ -27,6 +30,10 @@
   - [ ] Add background -- frame in sleep dreamy ness
   - [ ] Add start game screen
     - [ ] MVP: Excalibur play
+
+## Bugs
+
+- [x] 2 stacked ship on finish line start sinking :D -> this.kill()
 
 ## Things to try:
 

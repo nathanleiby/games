@@ -10,7 +10,9 @@ import {
   vec,
 } from "excalibur";
 import { FINISH_LINE_WIDTH, FLOOR_HEIGHT } from "./config";
+import { incrementSheepCounted } from "./gameState";
 import { spriteSheet } from "./loader";
+import { refreshUI } from "./ui";
 
 const WALK_VEL = vec(50, 0);
 
@@ -84,7 +86,8 @@ export class Sheep extends Actor {
   private jump() {
     // if is on ground
     if (this.pos.y === FLOOR_HEIGHT) {
-      this.vel.y = -300;
+      this.vel.y = -400;
+      this.vel.x *= 1.1;
 
       this.jumpTimer?.start();
     }
@@ -101,6 +104,9 @@ export class Sheep extends Actor {
     if (this.pos.x >= FINISH_LINE_WIDTH) {
       this.vel = vec(0, 0);
       this.didCrossFinishLine = true;
+      incrementSheepCounted();
+      refreshUI();
+      this.kill();
       return;
     }
 
