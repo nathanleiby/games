@@ -4,12 +4,13 @@
 
 - [ ] game map
   - [..] simple obstacles
+  - [ ] first level layout
 - [ ] tower
   - [x] place a tower
+  - [ ] attack enemy
   - [ ] tear down a built tower
   - [ ] verify legal build position
   - [ ] preview build position, then confirm
-  - [ ] attack enemy
   - [ ] die to enemy(?)
 - [x] base
 - [x] enemy

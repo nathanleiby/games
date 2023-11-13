@@ -11,6 +11,7 @@ import { Enemy, EnemyType } from "./enemy";
 import { gameState } from "./gamestate";
 import { HEIGHT, TAGS, WIDTH } from "./globals";
 import { Player } from "./player";
+import { Resources } from "./resources";
 import { refreshUI, setupUI } from "./ui";
 
 const spawnWave = (
@@ -70,6 +71,29 @@ export class LevelOne extends Scene {
       color: Color.Black,
       collisionType: CollisionType.Fixed,
     });
+
+    // const sprite = new ex.Sprite({
+    //   image: image,
+    //   sourceView: {
+    //     // Take a small slice of the source image starting at pixel (10, 10) with dimension 20 pixels x 20 pixels
+    //     x: 10,
+    //     y: 10,
+    //     width: 20,
+    //     height: 20,
+    //   },
+    //   destSize: {
+    //     // Optionally specify a different projected size, otherwise use the source
+    //     width: 100,
+    //     height: 100,
+    //   },
+    // });
+    const bg = Resources.Images.levelOneBackgroundImage.toSprite();
+    const background = new Actor({
+      x: 0,
+      y: 0,
+      collisionType: CollisionType.PreventCollision,
+    });
+    // game.add(bg);
 
     const base = new Actor({
       x: WIDTH - 50 - 10,

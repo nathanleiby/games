@@ -1,6 +1,7 @@
 import { Engine, Input } from "excalibur";
 import { HEIGHT, WIDTH } from "./globals";
 import { LevelOne } from "./level";
+import { loader } from "./resources";
 import "./style.css";
 
 const game = new Engine({
@@ -33,4 +34,4 @@ game.onPreUpdate = (_engine, _delta) => {
 };
 
 game.goToScene("l1");
-game.start();
+game.start(loader);
