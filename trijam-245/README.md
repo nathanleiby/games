@@ -3,7 +3,10 @@
 "It was all a dream"
 https://itch.io/jam/trijam-245
 
-##
+## Attributions
 
-- Music - https://opengameart.org/content/a-lucid-dream
-- Sounds - https://opengameart.org/content/soundpack-02
+- Images
+  - Sheep - https://opengameart.org/content/lpc-style-farm-animals
+- Sound
+  - Music - https://opengameart.org/content/a-lucid-dream
+  - Effects - https://opengameart.org/content/soundpack-02
