@@ -5,7 +5,7 @@
 - [ ] game map
   - [..] simple obstacles
   - [ ] first level layout
-- [ ] tower
+- [ ] tower$$
   - [x] place a tower
   - [ ] attack enemy
   - [ ] tear down a built tower
