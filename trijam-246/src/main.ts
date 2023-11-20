@@ -13,7 +13,7 @@ const game = new Engine({
   // displayMode: DisplayMode.FitScreen,
 
   // For debugging
-  suppressPlayButton: true,
+  // suppressPlayButton: true,
 });
 
 const level = new Level();

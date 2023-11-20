@@ -7,8 +7,6 @@
 - [ ] Game loop
   - [ ] Victory!
     - [ ] Congrats on beating three- try out "endless" mode for a challenge
-  - [ ] Fail a level
-    - [ ] Try again?
 
 ### Should
 

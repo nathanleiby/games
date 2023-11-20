@@ -7,7 +7,7 @@ import {
   TextAlign,
   vec,
 } from "excalibur";
-import { SCREEN_HEIGHT, SCREEN_WIDTH } from "./config";
+import { SCREEN_WIDTH } from "./config";
 import { gameState } from "./gameState";
 
 export const currentLevelLabel = new Label({
@@ -34,7 +34,7 @@ export const currentSequenceLengthLabel = new Label({
 
 export const correctLabel = new Label({
   text: "",
-  pos: vec(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2),
+  pos: vec(SCREEN_WIDTH / 2, 128),
   font: new Font({
     family: "impact",
     size: 100,

@@ -11,7 +11,7 @@ interface GameState {
 }
 
 export const gameState: GameState = {
-  currentLevel: 1,
+  currentLevel: 0,
   currentSequenceLength: 1,
   isGameOver: false,
 
@@ -30,10 +30,14 @@ export function newGame() {
   gameState.currentSequenceLength = 1;
   gameState.isGameOver = false;
 
-  resetPuzzle();
+  generateNewPuzzle();
 }
 
-export function resetPuzzle() {
+export function retryPuzzle() {
+  gameState.playInput = [];
+}
+
+export function generateNewPuzzle() {
   gameState.playInput = [];
 
   // generate a desired input according to the given length, composed of BOOPS and BEEPS
