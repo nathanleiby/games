@@ -10,6 +10,7 @@ import {
   Scene,
   TextAlign,
 } from "excalibur";
+import { BeepButton } from "./BeepButton";
 import { SCREEN_HEIGHT, SCREEN_WIDTH } from "./config";
 import {
   BEEP,
@@ -53,6 +54,7 @@ export class Level extends Scene {
         playDesiredInput();
       } else {
         showCorrect(false);
+        // TODO: count total errors? fail if too many
         gameState.isGameOver = true;
       }
     }
@@ -105,44 +107,42 @@ export class Level extends Scene {
     game.add(retryLabel);
 
     retryButton.on("pointerdown", async () => {
-      resetPuzzle();
+      // reset player input
+      gameState.playInput = [];
       await playDesiredInput();
     });
 
-    const beepButton = new Actor({
-      x: 384,
-      y: SCREEN_HEIGHT - 64,
-      width: 64,
-      height: 64,
-      color: Color.fromRGB(255, 0, 0),
-      // collisionType: CollisionType.Fixed,
-    });
-    game.add(beepButton);
-    beepButton.on("pointerdown", () => {
+    // Beep
+    const beepHandler = () => {
       if (gameState.isPlayingDesiredInput) return;
-
       Sounds.beep.play(1.0).then(() => {
         addPlayInput(BEEP);
         this.checkPuzzle();
       });
-    });
-
-    const boopButton = new Actor({
-      x: 246,
+    };
+    const beepButton = new BeepButton({
+      x: 384,
       y: SCREEN_HEIGHT - 64,
-      width: 64,
-      height: 64,
-      color: Color.fromRGB(0, 0, 255),
-      // collisionType: CollisionType.Fixed,
+      color: Color.fromRGB(255, 0, 0),
+      handler: beepHandler,
     });
-    game.add(boopButton);
-    boopButton.on("pointerdown", () => {
+    game.add(beepButton);
+
+    // Boop
+    const boopHandler = () => {
       if (gameState.isPlayingDesiredInput) return;
 
       Sounds.boop.play(1.0).then(() => {
         addPlayInput(BOOP);
         this.checkPuzzle();
       });
+    };
+    const boopButton = new BeepButton({
+      x: 246,
+      y: SCREEN_HEIGHT - 64,
+      color: Color.fromRGB(0, 0, 255),
+      handler: boopHandler,
     });
+    game.add(boopButton);
   }
 }

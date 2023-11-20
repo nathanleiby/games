@@ -46,6 +46,9 @@ export function resetPuzzle() {
       gameState.desiredInput.push(BEEP);
     }
   }
+
+  // to help for playtesting without sound
+  console.log("Desired Input:", gameState.desiredInput);
 }
 
 export function addPlayInput(input: string) {

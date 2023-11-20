@@ -36,7 +36,6 @@ export const correctLabel = new Label({
   text: "",
   pos: vec(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2),
   font: new Font({
-    // opacity: 0,
     family: "impact",
     size: 100,
     unit: FontUnit.Px,
@@ -44,7 +43,6 @@ export const correctLabel = new Label({
     textAlign: TextAlign.Center,
     baseAlign: BaseAlign.Middle,
   }),
-  // visible: true,
 });
 
 export function showCorrect(isCorrect: boolean) {

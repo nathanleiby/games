@@ -5,11 +5,6 @@
 ### Must
 
 - [ ] Game loop
-  - [ ] Play the level prompt
-    - [ ] Level one
-      - [ ] "Listen"
-      - [ ] Win a level
-    - [ ] Level two..
   - [ ] Victory!
     - [ ] Congrats on beating three- try out "endless" mode for a challenge
   - [ ] Fail a level
@@ -17,6 +12,15 @@
 
 ### Should
 
+- add tutorial / level 0 that makes it clear which sound each button makes
+  - introduce 1 button, then repetition, then another.
+    - beep.
+    - beep beep
+    - beep boop beep
+    - beep beep boop boop
+      - (add growing and shrinking buttons -- no harder just a sense of what might change)
+    - beep boop boop beep beep
+- add "bop" - 3rd button
 - interaction challenges
   - moving targets
     - left to right
