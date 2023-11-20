@@ -5,14 +5,17 @@ import {
   CollisionType,
   Color,
   EasingFunctions,
+  EmitterType,
   Engine,
   Font,
   FontUnit,
   Label,
   ParallelActions,
+  ParticleEmitter,
   RotationType,
   Scene,
   TextAlign,
+  Vector,
   vec,
 } from "excalibur";
 import { BeepButton } from "./BeepButton";
@@ -301,6 +304,32 @@ export class Level extends Scene {
       retryButton.kill();
       retryLabel.kill();
     };
+
+    var emitter = new ParticleEmitter({
+      x: 938,
+      y: 380,
+      width: 1837,
+      height: 4723,
+    });
+    emitter.emitterType = EmitterType.Circle;
+    emitter.radius = 810;
+    emitter.minVel = 100;
+    emitter.maxVel = 200;
+    emitter.minAngle = 0;
+    emitter.maxAngle = 6.2;
+    emitter.isEmitting = true;
+    emitter.emitRate = 167;
+    emitter.opacity = 0.3;
+    emitter.fadeFlag = true;
+    emitter.particleLife = 3000;
+    emitter.maxSize = 10;
+    emitter.minSize = 1;
+    emitter.startSize = 0;
+    emitter.endSize = 0;
+    emitter.acceleration = new Vector(-10, 10);
+    emitter.beginColor = Color.Chartreuse;
+    emitter.endColor = Color.Green;
+    game.add(emitter);
 
     // First time puzzle
     generateNewPuzzle();
