@@ -10,6 +10,7 @@ import {
 } from "./gameState";
 import { Sounds } from "./loader";
 import "./style.css";
+import { currentLevelLabel, currentSequenceLengthLabel, refreshUI } from "./ui";
 
 export class Level extends Scene {
   checkPuzzle = () => {
@@ -19,13 +20,23 @@ export class Level extends Scene {
       );
       if (isCorrect) {
         console.log("correct");
-        // TODO: next level
+        if (gameState.currentSequenceLength == 5) {
+          gameState.currentSequenceLength = 1;
+          gameState.currentLevel++;
+          if (gameState.currentLevel == 2) {
+            // TODO: victory condition
+            gameState.isGameOver = true;
+          }
+        } else {
+          gameState.currentSequenceLength++;
+        }
+
         resetPuzzle();
+        refreshUI();
         playDesiredInput();
       } else {
         console.log("wrong");
-        resetPuzzle();
-        playDesiredInput();
+        gameState.isGameOver = true;
       }
     }
   };
@@ -45,6 +56,11 @@ export class Level extends Scene {
       collisionType: CollisionType.PreventCollision,
     });
     game.add(background);
+
+    // UI
+    game.add(currentLevelLabel);
+    game.add(currentSequenceLengthLabel);
+    refreshUI();
 
     const newPuzzleButton = new Actor({
       x: 64,
@@ -69,6 +85,8 @@ export class Level extends Scene {
     });
     game.add(beepButton);
     beepButton.on("pointerdown", () => {
+      if (gameState.isPlayingDesiredInput) return;
+
       Sounds.beep.play(1.0).then(() => {
         addPlayInput(BEEP);
         this.checkPuzzle();
@@ -85,6 +103,8 @@ export class Level extends Scene {
     });
     game.add(boopButton);
     boopButton.on("pointerdown", () => {
+      if (gameState.isPlayingDesiredInput) return;
+
       Sounds.boop.play(1.0).then(() => {
         addPlayInput(BOOP);
         this.checkPuzzle();
