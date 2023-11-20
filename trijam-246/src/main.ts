@@ -1,4 +1,5 @@
 import { Engine } from "excalibur";
+import { LandingScreen } from "./LandingScreen";
 import { SCREEN_HEIGHT, SCREEN_WIDTH } from "./config";
 import { Level } from "./level";
 import { loader } from "./loader";
@@ -16,8 +17,8 @@ const game = new Engine({
   // suppressPlayButton: true,
 });
 
-const level = new Level();
 game.start(loader);
 
-game.addScene("level", level);
-game.goToScene("level");
+game.addScene("landing", new LandingScreen());
+game.addScene("level", new Level());
+game.goToScene("landing");

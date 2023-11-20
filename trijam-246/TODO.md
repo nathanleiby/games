@@ -4,10 +4,6 @@
 
 ### Must
 
-- [ ] Game loop
-  - [ ] Victory!
-    - [ ] Congrats on beating three- try out "endless" mode for a challenge
-
 ### Should
 
 - add tutorial / level 0 that makes it clear which sound each button makes
@@ -33,7 +29,7 @@
 
 ### Could
 
-- ## nice background audio to support the beeps and boops
+- background audio to support the beeps and boops
 - nice background image
   - (learn) perhaps use a shader for a shifting background
     - https://excaliburjs.com/docs/postprocessors/#custom-shader-based-post-processors
