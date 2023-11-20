@@ -1,4 +1,15 @@
-import { Actor, CollisionType, Color, Engine, Scene } from "excalibur";
+import {
+  Actor,
+  BaseAlign,
+  CollisionType,
+  Color,
+  Engine,
+  Font,
+  FontUnit,
+  Label,
+  Scene,
+  TextAlign,
+} from "excalibur";
 import { SCREEN_HEIGHT, SCREEN_WIDTH } from "./config";
 import {
   BEEP,
@@ -10,7 +21,13 @@ import {
 } from "./gameState";
 import { Sounds } from "./loader";
 import "./style.css";
-import { currentLevelLabel, currentSequenceLengthLabel, refreshUI } from "./ui";
+import {
+  correctLabel,
+  currentLevelLabel,
+  currentSequenceLengthLabel,
+  refreshUI,
+  showCorrect,
+} from "./ui";
 
 export class Level extends Scene {
   checkPuzzle = () => {
@@ -19,7 +36,7 @@ export class Level extends Scene {
         (input, index) => input === gameState.desiredInput[index]
       );
       if (isCorrect) {
-        console.log("correct");
+        showCorrect(true);
         if (gameState.currentSequenceLength == 5) {
           gameState.currentSequenceLength = 1;
           gameState.currentLevel++;
@@ -35,7 +52,7 @@ export class Level extends Scene {
         refreshUI();
         playDesiredInput();
       } else {
-        console.log("wrong");
+        showCorrect(false);
         gameState.isGameOver = true;
       }
     }
@@ -60,17 +77,34 @@ export class Level extends Scene {
     // UI
     game.add(currentLevelLabel);
     game.add(currentSequenceLengthLabel);
+    game.add(correctLabel);
     refreshUI();
 
-    const newPuzzleButton = new Actor({
+    const retryButton = new Actor({
       x: 64,
       y: 64,
-      width: 64,
-      height: 64,
+      radius: 40,
       color: Color.fromRGB(255, 255, 255),
     });
-    game.add(newPuzzleButton);
-    newPuzzleButton.on("pointerdown", async () => {
+    game.add(retryButton);
+    const retryLabel = new Label({
+      text: "Retry",
+      x: 64,
+      y: 64,
+      font: new Font({
+        // opacity: 0,
+        family: "impact",
+        size: 24,
+        unit: FontUnit.Px,
+        // color: new Color(255, 255, 255),
+        textAlign: TextAlign.Center,
+        baseAlign: BaseAlign.Middle,
+      }),
+      visible: true,
+    });
+    game.add(retryLabel);
+
+    retryButton.on("pointerdown", async () => {
       resetPuzzle();
       await playDesiredInput();
     });

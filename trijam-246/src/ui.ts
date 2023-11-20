@@ -1,5 +1,13 @@
-import { Color, Font, FontUnit, Label, vec } from "excalibur";
-import { SCREEN_WIDTH } from "./config";
+import {
+  BaseAlign,
+  Color,
+  Font,
+  FontUnit,
+  Label,
+  TextAlign,
+  vec,
+} from "excalibur";
+import { SCREEN_HEIGHT, SCREEN_WIDTH } from "./config";
 import { gameState } from "./gameState";
 
 export const currentLevelLabel = new Label({
@@ -23,6 +31,28 @@ export const currentSequenceLengthLabel = new Label({
     color: new Color(255, 255, 255),
   }),
 });
+
+export const correctLabel = new Label({
+  text: "",
+  pos: vec(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2),
+  font: new Font({
+    // opacity: 0,
+    family: "impact",
+    size: 100,
+    unit: FontUnit.Px,
+    color: new Color(255, 255, 255),
+    textAlign: TextAlign.Center,
+    baseAlign: BaseAlign.Middle,
+  }),
+  // visible: true,
+});
+
+export function showCorrect(isCorrect: boolean) {
+  correctLabel.text = isCorrect ? "Correct" : "Wrong!";
+  correctLabel.actions.delay(500).callMethod(() => {
+    correctLabel.text = "";
+  });
+}
 
 export function refreshUI() {
   currentLevelLabel.text = `Level #${gameState.currentLevel}`;
