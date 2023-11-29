@@ -1,4 +1,4 @@
-use bevy::{input::keyboard::KeyboardInput, prelude::*};
+use bevy::prelude::*;
 
 use crate::{
     asset_loader::SceneAssets,
@@ -11,16 +11,24 @@ const SPACESHIP_SPEED: f32 = 25.0;
 const SPACESHIP_ROTATION_SPEED: f32 = 2.5;
 const SPACESHIP_ROLL_SPEED: f32 = 2.5;
 
+const MISSILE_SPEED: f32 = 50.0;
+const MISSILE_FORWARD_SPAWN_SCALAR: f32 = 7.5;
+
 // marker component
 #[derive(Component, Debug)]
 pub struct Spaceship;
+
+// marker component
+#[derive(Component, Debug)]
+pub struct SpaceshipMissile;
 
 pub struct SpaceshipPlugin;
 impl Plugin for SpaceshipPlugin {
     fn build(&self, app: &mut App) {
         // PostStartup, so we ensure it's done after Startup steps like bootstrapping assets
         app.add_systems(PostStartup, spawn_spaceship)
-            .add_systems(Update, spaceship_movement_controls);
+            .add_systems(Update, spaceship_movement_controls)
+            .add_systems(Update, spaceship_weapon_controls);
     }
 }
 
@@ -87,4 +95,32 @@ fn spaceship_movement_controls(
     // we negate transform b/c most models online are facing positive Z, but bevy considers forward as negative Z
     // classic 3d graphics problem
     velocity.value = -transform.forward() * movement;
+}
+
+fn spaceship_weapon_controls(
+    mut commands: Commands,
+    query: Query<&Transform, With<Spaceship>>,
+    keyboard_input: Res<Input<KeyCode>>,
+    // time: Res<Time>,
+    scene_assets: Res<SceneAssets>,
+) {
+    let transform = query.single();
+
+    // TODO: add a repeat handling
+    if keyboard_input.pressed(KeyCode::Space) {
+        commands.spawn((
+            MovingObjectBundle {
+                velocity: Velocity::new(-transform.forward() * MISSILE_SPEED),
+                acceleration: Acceleration::new(Vec3::ZERO),
+                model: SceneBundle {
+                    scene: scene_assets.missiles.clone(),
+                    transform: Transform::from_translation(
+                        transform.translation + -transform.forward() * MISSILE_FORWARD_SPAWN_SCALAR,
+                    ),
+                    ..default()
+                },
+            },
+            SpaceshipMissile,
+        ));
+    }
 }
