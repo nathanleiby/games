@@ -7,6 +7,7 @@ use crate::{
     asset_loader::SceneAssets,
     collision_detection::Collider,
     movement::{Acceleration, MovingObjectBundle, Velocity},
+    schedule::InGameSet,
 };
 
 // Keep the asteroids slightly away from where the spaceship spawns and in the inner part of the screen
@@ -75,9 +76,12 @@ impl Plugin for AsteroidPlugin {
         app.insert_resource(SpawnTimer {
             timer: Timer::from_seconds(SPAWN_TIME_SECONDS, TimerMode::Repeating),
         })
-        .add_systems(Update, spawn_asteroid)
-        .add_systems(Update, rotate_asteroids)
-        .add_systems(Update, handle_asteroid_collision);
+        .add_systems(
+            Update,
+            // these SystemSets are arbitrary starting point. We put spawn_asteroid in the EntityUpdates set
+            // we don't chain() b/c spawning and rotatinng aren't dependent on each other
+            (spawn_asteroid, rotate_asteroids).in_set(InGameSet::EntityUpdates),
+        );
     }
 }
 
@@ -85,23 +89,5 @@ const ROTATE_SPEED: f32 = 2.5;
 fn rotate_asteroids(mut query: Query<&mut Transform, With<Asteroid>>, time: Res<Time>) {
     for mut transform in query.iter_mut() {
         transform.rotate_local_z(time.delta_seconds() * ROTATE_SPEED);
-    }
-}
-
-fn handle_asteroid_collision(
-    mut commands: Commands,
-    query: Query<(Entity, &Collider), With<Asteroid>>,
-) {
-    for (entity, collider) in query.iter() {
-        for &collided_entity in collider.colliding_entities.iter() {
-            // ignore collisions with other asteroids
-            if query.get(collided_entity).is_ok() {
-                continue;
-            }
-
-            // Despawn the asteroid (and its children-- e.g. the glb model has lots of children)
-            info!("Despawning asteroid due to collision. entity: {:?}", entity);
-            commands.entity(entity).despawn_recursive();
-        }
     }
 }

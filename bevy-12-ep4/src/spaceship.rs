@@ -4,6 +4,7 @@ use crate::{
     asset_loader::SceneAssets,
     collision_detection::Collider,
     movement::{Acceleration, MovingObjectBundle, Velocity},
+    schedule::InGameSet,
 };
 
 const STARTING_TRANSLATION: Vec3 = Vec3::new(0.0, 0.0, 0.0);
@@ -19,11 +20,12 @@ const MISSILE_FORWARD_SPAWN_SCALAR: f32 = 7.5;
 const SPACESHIP_RADIUS: f32 = 5.0;
 const MISSILE_RADIUS: f32 = 1.0;
 
-// marker component
 #[derive(Component, Debug)]
 pub struct Spaceship;
 
-// marker component
+#[derive(Component, Debug)]
+pub struct SpaceshipShield;
+
 #[derive(Component, Debug)]
 pub struct SpaceshipMissile;
 
@@ -31,9 +33,16 @@ pub struct SpaceshipPlugin;
 impl Plugin for SpaceshipPlugin {
     fn build(&self, app: &mut App) {
         // PostStartup, so we ensure it's done after Startup steps like bootstrapping assets
-        app.add_systems(PostStartup, spawn_spaceship)
-            .add_systems(Update, spaceship_movement_controls)
-            .add_systems(Update, spaceship_weapon_controls);
+        app.add_systems(PostStartup, spawn_spaceship).add_systems(
+            Update,
+            (
+                spaceship_movement_controls,
+                spaceship_weapon_controls,
+                spaceship_shield_controls,
+            )
+                .chain()
+                .in_set(InGameSet::UserInput),
+        );
     }
 }
 
@@ -58,7 +67,10 @@ fn spaceship_movement_controls(
     keyboard_input: Res<Input<KeyCode>>,
     time: Res<Time>,
 ) {
-    let (mut transform, mut velocity) = query.single_mut();
+    // handle case where spaceship is despawned (issue from ep3)
+    let Ok((mut transform, mut velocity)) = query.get_single_mut() else {
+        return;
+    };
     let mut rotation = 0.0;
     let mut roll = 0.0;
     let mut movement = 0.0;
@@ -110,9 +122,11 @@ fn spaceship_weapon_controls(
     // time: Res<Time>,
     scene_assets: Res<SceneAssets>,
 ) {
-    let transform = query.single();
+    let Ok(transform) = query.get_single() else {
+        return;
+    };
 
-    // TODO: add a repeat handling
+    // TODO: add fire rate? via Timer. right now these spawn on Update, not fixed timestep
     if keyboard_input.pressed(KeyCode::Space) {
         commands.spawn((
             MovingObjectBundle {
@@ -129,5 +143,20 @@ fn spaceship_weapon_controls(
             },
             SpaceshipMissile,
         ));
+    }
+}
+
+fn spaceship_shield_controls(
+    mut commands: Commands,
+    query: Query<Entity, With<Spaceship>>,
+    keyboard_input: Res<Input<KeyCode>>,
+) {
+    let Ok(spaceship) = query.get_single() else {
+        return;
+    };
+
+    if keyboard_input.pressed(KeyCode::Tab) {
+        // without proper flushing logic, insert could cause a panic if done on same frame as despawn of spaceship
+        commands.entity(spaceship).insert(SpaceshipShield);
     }
 }
