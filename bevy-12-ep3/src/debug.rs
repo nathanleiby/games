@@ -1,5 +1,7 @@
 use bevy::prelude::*;
 
+use crate::asteroid::Asteroid;
+
 pub struct DebugPlugin;
 impl Plugin for DebugPlugin {
     fn build(&self, app: &mut App) {
@@ -7,8 +9,8 @@ impl Plugin for DebugPlugin {
     }
 }
 
-fn print_position(query: Query<(Entity, &Transform)>) {
-    for (entity, transform) in query.iter() {
+fn print_position(query: Query<(Entity, &Asteroid, &Transform)>) {
+    for (entity, _, transform) in query.iter() {
         info!(
             "Entity: {:?} Transform: {:?}",
             entity, transform.translation

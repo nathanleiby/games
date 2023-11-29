@@ -1,10 +1,11 @@
+mod asteroid;
 mod camera;
 mod debug;
 mod movement;
 mod spaceship;
 
+use asteroid::AsteroidPlugin;
 use bevy::prelude::*;
-
 use camera::CameraPlugin;
 use debug::DebugPlugin;
 use movement::MovementPlugin;
@@ -22,5 +23,6 @@ fn main() {
         .add_plugins(CameraPlugin)
         .add_plugins(MovementPlugin)
         .add_plugins(DebugPlugin)
+        .add_plugins(AsteroidPlugin)
         .run();
 }
