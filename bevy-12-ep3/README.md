@@ -5,6 +5,7 @@ https://www.youtube.com/watch?v=R-u1EY9fOJQ&list=PL2wAo2qwCxGDp9fzBOTy_kpUTSwM1i
 
 Learnings:
 
-- When refactoring a plugin to another file.. can use "cmd+." for quick fix add add `mod x` to your main file
-- 1 unit is 1 meter in almost all 3d systems. important to use this standard since used in physics and more
-- putting movement into the Update loop is fragile. it's not a fixed physics timestep. We can solve via Bevy's time resource (delta time)
+- `With` used to constrain for only components that match. One pattern is to use marker Component, to fetch only entities with that Component.
+  - can use `With` to have "multiple constraints" (AND query)
+  - multiple matches (OR query)
+- Can grab a single entity with `single()` or `single_mut()` -- it will panic if there's not exactly one entity that matches the query
