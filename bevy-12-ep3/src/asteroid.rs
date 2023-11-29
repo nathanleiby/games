@@ -3,7 +3,10 @@ use std::ops::Range;
 use bevy::prelude::*;
 use rand::prelude::*;
 
-use crate::movement::{Acceleration, MovingObjectBundle, Velocity};
+use crate::{
+    asset_loader::{AssetLoaderPlugin, SceneAssets},
+    movement::{Acceleration, MovingObjectBundle, Velocity},
+};
 
 // Keep the asteroids slightly away from where the spaceship spawns and in the inner part of the screen
 const SPAWN_RANGE_X: Range<f32> = -25.0..25.0;
@@ -27,7 +30,7 @@ fn spawn_asteroid(
     mut commands: Commands,
     mut spawn_timer: ResMut<SpawnTimer>,
     time: Res<Time>,
-    asset_server: Res<AssetServer>,
+    scene_assets: Res<SceneAssets>,
 ) {
     // advance the timer
     spawn_timer.timer.tick(time.delta());
@@ -53,7 +56,7 @@ fn spawn_asteroid(
             velocity: Velocity::new(velocity),
             acceleration: Acceleration::new(acceleration),
             model: SceneBundle {
-                scene: asset_server.load("Asteroid.glb#Scene0"),
+                scene: scene_assets.asteroid.clone(),
                 transform: Transform::from_translation(translation),
                 ..default()
             },

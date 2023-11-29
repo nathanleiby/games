@@ -1,33 +1,27 @@
 use bevy::prelude::*;
 
-use crate::movement::{Acceleration, MovingObjectBundle, Velocity};
+use crate::{
+    asset_loader::SceneAssets,
+    movement::{Acceleration, MovingObjectBundle, Velocity},
+};
 
 const STARTING_TRANSLATION: Vec3 = Vec3::new(0.0, 0.0, 0.0);
 const STARTING_VELOCITY: Vec3 = Vec3::new(0.0, 0.0, 1.0);
 
-// # TODO: what is a Bundle vs an Entity?
-// One thought: You can have a bundle of bundles (tree), so entity is ref to the top-most one
-// Another thought (from Copilot): Bundle is a collection of components, Entity is a collection of bundles
-// Another thought: Bundle is a collection of components, Entity is a collection of components
-// Another thought: Bundle is a collection of components, Entity is a collection of components, and a bundle is a collection of components
-// Another thought: Bundle is a collection of components, Entity is a collection of components, and a bundle is a collection of components, and a bundle is a collection of components
-// Another thought: recursion might be causing chatgpt to stop autocompleting here
-// Another thought:
-
 pub struct SpaceshipPlugin;
 impl Plugin for SpaceshipPlugin {
     fn build(&self, app: &mut App) {
-        app.add_systems(Startup, spawn_spaceship);
+        // PostStartup, so we ensure it's done after Startup steps like bootstrapping assets
+        app.add_systems(PostStartup, spawn_spaceship);
     }
 }
 
-fn spawn_spaceship(mut commands: Commands, asset_server: Res<AssetServer>) {
-    let handle = asset_server.load("spaceship.glb#Scene0");
+fn spawn_spaceship(mut commands: Commands, scene_assets: Res<SceneAssets>) {
     commands.spawn(MovingObjectBundle {
         velocity: Velocity::new(STARTING_VELOCITY),
         acceleration: Acceleration::new(Vec3::ZERO),
         model: SceneBundle {
-            scene: handle,
+            scene: scene_assets.spaceship.clone(),
             transform: Transform::from_translation(STARTING_TRANSLATION),
             ..default()
         },
