@@ -15,20 +15,12 @@ impl Plugin for SchedulePlugin {
         app.configure_sets(
             Update,
             (
-                InGameSet::DespawnEntities,
-                // Flush commands (i.e. `apply_deferred` runs)
                 InGameSet::UserInput,
                 InGameSet::EntityUpdates,
                 InGameSet::CollisionDetection,
-                // TODO: why not put despawn LAST in the list? then we guarantee all it does is enqueue things to be removed.. which are then removed
+                InGameSet::DespawnEntities,
             )
                 .chain(),
-        )
-        .add_systems(
-            Update,
-            apply_deferred
-                .after(InGameSet::DespawnEntities)
-                .before(InGameSet::UserInput),
         );
     }
 }
