@@ -100,6 +100,7 @@ fn handle_asteroid_collision(
             }
 
             // Despawn the asteroid (and its children-- e.g. the glb model has lots of children)
+            info!("Despawning asteroid due to collision. entity: {:?}", entity);
             commands.entity(entity).despawn_recursive();
         }
     }
