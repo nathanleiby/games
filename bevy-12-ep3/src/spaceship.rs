@@ -58,13 +58,31 @@ fn spaceship_movement_controls(
         movement = -SPACESHIP_SPEED;
     }
 
-    // if keyboard_input.pressed(KeyCode::A) {
-    //     rotation = SPACESHIP_ROTATION_SPEED;
-    // }
+    // rotation
+    if keyboard_input.pressed(KeyCode::A) {
+        rotation = SPACESHIP_ROTATION_SPEED * time.delta_seconds();
+    }
 
-    // if keyboard_input.pressed(KeyCode::D) {
-    //     rotation = -SPACESHIP_ROTATION_SPEED * time.delta_seconds();
-    // }
+    if keyboard_input.pressed(KeyCode::D) {
+        rotation = -SPACESHIP_ROTATION_SPEED * time.delta_seconds();
+    }
+
+    // roll
+    if keyboard_input.pressed(KeyCode::Q) || keyboard_input.pressed(KeyCode::ShiftLeft) {
+        roll = -SPACESHIP_ROLL_SPEED * time.delta_seconds();
+    }
+    if keyboard_input.pressed(KeyCode::E) || keyboard_input.pressed(KeyCode::ControlLeft) {
+        roll = SPACESHIP_ROLL_SPEED * time.delta_seconds();
+    }
+
+    // Rotate around the Y-axis
+    // Ignore the Z-axis rotation (applied below)
+    transform.rotate_y(rotation);
+
+    // Rotate around the Z-axis
+    // By using `rotate_local_z`, the rotation is relative to current rotation.
+    // No game effect but it looks cool since you can see the ship's in 3D
+    transform.rotate_local_z(roll);
 
     // we negate transform b/c most models online are facing positive Z, but bevy considers forward as negative Z
     // classic 3d graphics problem
