@@ -2,6 +2,7 @@ use bevy::prelude::*;
 
 use crate::{
     asset_loader::SceneAssets,
+    collision_detection::Collider,
     movement::{Acceleration, MovingObjectBundle, Velocity},
 };
 
@@ -13,6 +14,10 @@ const SPACESHIP_ROLL_SPEED: f32 = 2.5;
 
 const MISSILE_SPEED: f32 = 50.0;
 const MISSILE_FORWARD_SPAWN_SCALAR: f32 = 7.5;
+
+// radii for collision detection
+const SPACESHIP_RADIUS: f32 = 5.0;
+const MISSILE_RADIUS: f32 = 1.0;
 
 // marker component
 #[derive(Component, Debug)]
@@ -37,6 +42,7 @@ fn spawn_spaceship(mut commands: Commands, scene_assets: Res<SceneAssets>) {
         MovingObjectBundle {
             velocity: Velocity::new(Vec3::ZERO),
             acceleration: Acceleration::new(Vec3::ZERO),
+            collider: Collider::new(SPACESHIP_RADIUS),
             model: SceneBundle {
                 scene: scene_assets.spaceship.clone(),
                 transform: Transform::from_translation(STARTING_TRANSLATION),
@@ -112,6 +118,7 @@ fn spaceship_weapon_controls(
             MovingObjectBundle {
                 velocity: Velocity::new(-transform.forward() * MISSILE_SPEED),
                 acceleration: Acceleration::new(Vec3::ZERO),
+                collider: Collider::new(MISSILE_RADIUS),
                 model: SceneBundle {
                     scene: scene_assets.missiles.clone(),
                     transform: Transform::from_translation(

@@ -9,3 +9,6 @@ Learnings:
   - can use `With` to have "multiple constraints" (AND query)
   - multiple matches (OR query)
 - Can grab a single entity with `single()` or `single_mut()` -- it will panic if there's not exactly one entity that matches the query
+- Can use a 3rd party plugin for Physics (
+  - [bevy_rapier](https://github.com/dimforge/bevy_rapier)
+  - https://github.com/Jondolf/bevy_xpbd
