@@ -1,4 +1,4 @@
-import { Engine } from "excalibur";
+import { DisplayMode, Engine } from "excalibur";
 import { SCREEN_HEIGHT, SCREEN_WIDTH } from "./config";
 import { Level } from "./level";
 import { loader } from "./loader";
@@ -10,10 +10,10 @@ const game = new Engine({
   fixedUpdateFps: 60,
   // Turn off anti-aliasing for pixel art graphics
   // antialiasing: false
-  // displayMode: DisplayMode.FitScreen,
-
+  canvasElementId: "game",
+  displayMode: DisplayMode.FitScreen,
   // For debugging
-  // suppressPlayButton: true,
+  suppressPlayButton: true,
 });
 
 const level = new Level();

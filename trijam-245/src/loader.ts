@@ -1,4 +1,5 @@
 import { ImageSource, Loader, Sound, SpriteSheet } from "excalibur";
+import background from "../images/4by3-background-rough.png";
 import sheepWalk from "../images/sheep_walk.png";
 import music from "../sounds/SleepHypnosis.mp3";
 import coin01Sound from "../sounds/Sound02ogg/coin01.ogg";
@@ -9,6 +10,7 @@ import select02Sound from "../sounds/Sound02ogg/select02.ogg";
 
 export const Images = {
   playerSheet: new ImageSource(sheepWalk),
+  background: new ImageSource(background),
 };
 
 export const Sounds = {
