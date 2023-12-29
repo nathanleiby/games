@@ -35,6 +35,7 @@
 ## Bugs
 
 - [x] 2 stacked ship on finish line start sinking :D -> this.kill()
+- [ ] Sheep turn around when touching top of fence
 - [ ] Sheep can get stuck and stop moving
 - [ ] Can prevent game from being finishable, since we stop spawning more sheep
 

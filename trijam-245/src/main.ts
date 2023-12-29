@@ -1,4 +1,4 @@
-import { Color, DisplayMode, Engine } from "excalibur";
+import { Color, DisplayMode, Engine, Physics, vec } from "excalibur";
 import { SCREEN_HEIGHT, SCREEN_WIDTH } from "./config";
 import { Level } from "./level";
 import { loader } from "./loader";
@@ -16,6 +16,8 @@ const game = new Engine({
   suppressPlayButton: true,
   backgroundColor: Color.Black,
 });
+
+Physics.gravity = vec(0, 100);
 
 const level = new Level();
 game.start(loader);

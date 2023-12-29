@@ -1,22 +1,15 @@
+import { Actor, CollisionType, Color, Engine, Scene, Timer } from "excalibur";
+import { Background } from "./background";
 import {
-  Actor,
-  CollisionType,
-  Color,
-  Engine,
-  Scene,
-  Timer,
-  Vector,
-} from "excalibur";
-import {
+  DEBUG_FLAGS,
   FENCE_HEIGHT,
   FLOOR_HEIGHT,
-  GROUND_HEIGHT,
   MAX_SHEEP,
   SCREEN_HEIGHT,
   SCREEN_WIDTH,
 } from "./config";
 import { gameState } from "./gameState";
-import { Images, Sounds } from "./loader";
+import { Sounds } from "./loader";
 import { Sheep, SheepVariety } from "./sheep";
 import "./style.css";
 import { sheepCountLabel, sleepyOverlay, zzzLabel, zzzLabel2 } from "./ui";
@@ -25,31 +18,16 @@ const GROUND_COLOR = Color.fromRGB(30, 160, 30, 0.5);
 
 export class Level extends Scene {
   onInitialize(game: Engine): void {
-    // Background
-    const backgroundImage = Images.background.toSprite();
-    const backgroundEntity = new Actor();
-    backgroundEntity.graphics.use(backgroundImage);
-    // backgroundEntity.scale.setTo(0.9, 0.9);
-    backgroundEntity.anchor = new Vector(0, 0);
-    game.add(backgroundEntity);
-
-    const ground = new Actor({
-      x: SCREEN_WIDTH / 2,
-      y: SCREEN_HEIGHT - 64,
-      width: SCREEN_WIDTH,
-      height: GROUND_HEIGHT,
-      color: GROUND_COLOR,
-      collisionType: CollisionType.PreventCollision,
-    });
-    game.add(ground);
+    const bg = new Background();
+    game.add(bg);
 
     const invisibleFloor = new Actor({
-      x: 400,
-      y: SCREEN_HEIGHT - 64 + 32,
+      x: SCREEN_WIDTH / 2,
+      y: FLOOR_HEIGHT - 32,
       width: SCREEN_WIDTH,
       height: 1,
       color: Color.Red,
-      visible: false,
+      // visible: false,
       collisionType: CollisionType.Fixed,
     });
     game.add(invisibleFloor);
@@ -71,7 +49,7 @@ export class Level extends Scene {
       y: FLOOR_HEIGHT - 32,
       width: 16,
       height: FENCE_HEIGHT,
-      color: Color.fromRGB(160, 100, 100),
+      color: Color.fromRGB(160, 100, 100, 0.5),
       collisionType: CollisionType.Fixed,
     });
     fence.addTag("fence");
@@ -83,7 +61,7 @@ export class Level extends Scene {
     const spawnSheep = () => {
       const sheep = new Sheep({
         x: 64,
-        y: FLOOR_HEIGHT,
+        y: FLOOR_HEIGHT - 64,
         variety:
           gameState.sheepCounted < 1
             ? SheepVariety.White
@@ -117,6 +95,9 @@ export class Level extends Scene {
     game.add(zzzLabel);
     game.add(zzzLabel2);
 
-    Sounds.music.play(0.2);
+    // TODO: re-enable
+    if (!DEBUG_FLAGS.DISABLE_MUSIC) {
+      Sounds.music.play(0.2);
+    }
   }
 }

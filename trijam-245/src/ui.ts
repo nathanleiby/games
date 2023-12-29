@@ -7,7 +7,7 @@ import {
   Label,
   vec,
 } from "excalibur";
-import { MAX_SHEEP, SCREEN_HEIGHT, SCREEN_WIDTH } from "./config";
+import { DEBUG_FLAGS, MAX_SHEEP, SCREEN_HEIGHT, SCREEN_WIDTH } from "./config";
 import { gameState } from "./gameState";
 
 export const sheepCountLabel = new Label({
@@ -60,7 +60,10 @@ export function refreshUI() {
     0,
     (gameState.sheepCounted / MAX_SHEEP) * 0.8
   );
-  if (gameState.sheepCounted >= MAX_SHEEP) {
+  if (
+    gameState.sheepCounted >= MAX_SHEEP ||
+    (gameState.sheepCounted >= 1 && DEBUG_FLAGS.END_GAME_AT_ONE_SHEEP)
+  ) {
     zzzLabel.text = "Zzz...";
     zzzLabel2.text = "(gg)";
   }

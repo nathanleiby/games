@@ -5,7 +5,6 @@ import {
   Engine,
   GraphicsGroup,
   Keys,
-  Rectangle,
   Scene,
   Timer,
   vec,
@@ -15,7 +14,7 @@ import { gameState, incrementSheepCounted } from "./gameState";
 import { Sounds, spriteSheet } from "./loader";
 import { refreshUI } from "./ui";
 
-const WALK_VEL = vec(50, 0);
+const WALK_VEL = vec(100, 0);
 
 export enum SheepVariety {
   White,
@@ -31,27 +30,26 @@ export class Sheep extends Actor {
 
   constructor(props: { x: number; y: number; variety: SheepVariety }) {
     const { x, y, variety } = props;
-    super({ x, y, width: 48, height: 48, collisionType: CollisionType.Active });
+    super({
+      x,
+      y,
+      width: 48,
+      height: 48,
+      collisionType: CollisionType.Active,
+    });
     this.variety = variety;
+    this.body.useGravity = true;
   }
 
   public onInitialize(_engine: Engine) {
     const sprite = spriteSheet.sprites[5]; // left facing
 
+    sprite.tint =
+      this.variety === SheepVariety.Black ? Color.Black : Color.White;
     this.vel = WALK_VEL;
 
-    // display the collide
-    const rect = new Rectangle({
-      width: this.width,
-      height: this.height,
-      color: this.variety === SheepVariety.Black ? Color.Black : Color.White,
-    });
     const group = new GraphicsGroup({
       members: [
-        {
-          graphic: rect,
-          pos: vec(40, 40),
-        },
         {
           graphic: sprite,
           pos: vec(0, 0),
@@ -64,7 +62,7 @@ export class Sheep extends Actor {
     this.jumpTimer = new Timer({
       interval: 10,
       fcn: () => {
-        this.vel.y += 5;
+        this.vel.y += 2.5;
         if (this.pos.y >= FLOOR_HEIGHT) {
           this.pos.y = FLOOR_HEIGHT;
           this.vel.y = 0;
@@ -82,7 +80,7 @@ export class Sheep extends Actor {
       if (this.didCrossFinishLine) return;
 
       // if on top of the fence, don't change direction
-      if (event.other.hasTag("fence") && this.pos.y <= 416) {
+      if (event.other.hasTag("fence") && this.vel.y < 0) {
         return;
       }
 
@@ -124,6 +122,7 @@ export class Sheep extends Actor {
       return;
     }
 
+    // TODO: change this to a collision with an invis hitbox
     if (this.pos.x >= FINISH_LINE_WIDTH) {
       this.didCrossFinishLine = true;
       incrementSheepCounted();

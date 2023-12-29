@@ -1,5 +1,5 @@
 import { ImageSource, Loader, Sound, SpriteSheet } from "excalibur";
-import background from "../images/background-v1.png";
+import background from "../images/background-v3.png";
 import sheepWalk from "../images/sheep_walk.png";
 import music from "../sounds/SleepHypnosis.mp3";
 import coin01Sound from "../sounds/Sound02ogg/coin01.ogg";
@@ -30,12 +30,6 @@ export const spriteSheet = SpriteSheet.fromImageSource({
     columns: 4,
     spriteWidth: 128,
     spriteHeight: 128,
-  },
-  spacing: {
-    // Optionally specify the offset from the top left of sheet to start parsing
-    // originOffset: { x: 12, y: 12 },
-    // Optionally specify the margin between each sprite
-    // margin: { x: 64, y: 64 },
   },
 });
 
