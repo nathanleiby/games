@@ -35,29 +35,58 @@ export const sleepyOverlay = new Actor({
 
 export const zzzLabel = new Label({
   // text: "Zzz...",
-  pos: vec(SCREEN_WIDTH / 2 - 130, SCREEN_HEIGHT / 2),
+  pos: vec(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2 - 80),
   font: new Font({
     family: "impact",
     size: 140,
     unit: FontUnit.Px,
     color: Color.White,
+    textAlign: TextAlign.Center,
   }),
-  // visible: false, // TODO: toggling visible not working
 });
 export const zzzLabel2 = new Label({
   // text: "(gg)",
-  pos: vec(SCREEN_WIDTH / 2 - 50, SCREEN_HEIGHT / 2 + 80),
+  pos: vec(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2),
   font: new Font({
     family: "impact",
     size: 40,
     unit: FontUnit.Px,
     color: Color.White,
+    textAlign: TextAlign.Center,
   }),
-  // visible: false, // TODO: toggling visible not working
 });
 
+let numberToWord = (num: number) => {
+  switch (num) {
+    case 0:
+      return "no";
+    case 1:
+      return "one";
+    case 2:
+      return "two";
+    case 3:
+      return "three";
+    case 4:
+      return "four";
+    case 5:
+      return "five";
+    case 6:
+      return "six";
+    case 7:
+      return "seven";
+    case 8:
+      return "eight";
+    case 9:
+      return "nine";
+    default:
+      return "all";
+  }
+};
+
 export function refreshUI() {
-  sheepCountLabel.text = `Sheep: ${gameState.sheepCounted}`;
+  sheepCountLabel.text = `${numberToWord(
+    gameState.sheepCounted
+  )} sheep ready for sleep`;
   sleepyOverlay.color = new Color(
     0,
     0,

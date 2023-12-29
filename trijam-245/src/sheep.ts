@@ -35,15 +35,16 @@ export class Sheep extends Actor {
       height: 48,
       collisionType: CollisionType.Active,
     });
-    console.log("spawn sheep with id=", this.id);
     this.variety = variety;
+    this.addTag("sheep");
   }
 
   public onInitialize(_engine: Engine) {
-    const sprite = spriteSheet.sprites[5]; // left facing
+    const sprite = spriteSheet.sprites[5].clone();
 
     sprite.tint =
       this.variety === SheepVariety.Black ? Color.Black : Color.White;
+
     this.vel = WALK_VEL;
 
     const group = new GraphicsGroup({
@@ -61,18 +62,24 @@ export class Sheep extends Actor {
       if (this.didCrossFinishLine) return;
 
       // if on top of the fence, don't change direction
-      if (event.other.hasTag("fence") && event.contact.normal.y !== 0) {
+      if (event.other.hasTag("fence") && event.contact.normal.y < 0) {
         return;
       }
 
-      if (event.other.hasTag("floor")) {
+      if (
+        // landed on floor
+        event.other.hasTag(
+          "floor" ||
+            // landed on another sheep
+            (event.other.hasTag("sheep") && event.contact.normal.y < 0)
+        )
+      ) {
         this.isJumping = false;
         return;
       }
 
       // change x direction
       this.walkDirection *= -1;
-      this.vel.x = WALK_VEL.x * this.walkDirection;
 
       // TODO: better collide
       //   Sounds.select.play(0.05);
@@ -108,6 +115,10 @@ export class Sheep extends Actor {
       return;
     }
 
+    // this means you slide UP the fence.. a bit odd but makes game much easier!
+    // it was also added b/c sometimes sheep got stuck and stopped walking.
+    this.vel.x = WALK_VEL.x * this.walkDirection;
+
     // TODO: change this to a collision with an invis hitbox
     if (this.pos.x >= FINISH_LINE_WIDTH) {
       this.didCrossFinishLine = true;
@@ -121,6 +132,9 @@ export class Sheep extends Actor {
     if (engine.input.keyboard.wasPressed(Keys.Space)) {
       this.jump();
     }
+
+    // show whether it's jumping.. indicate if it can jump again
+    this.graphics.flipVertical = this.isJumping;
 
     // point sheep in correct direction
     this.graphics.flipHorizontal = this.vel.x >= 0;

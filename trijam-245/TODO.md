@@ -5,9 +5,9 @@
 ### v2
 
 - [x] fix jumping to work in new world
-- [ ] change collider over feet https://excaliburjs.com/docs/colliders/#compositecollider
-- [ ] change `Sheep: N` text on blackboard
+- [x] change collider over feet https://excaliburjs.com/docs/colliders/#compositecollider
 - [x] sheep don't jump after crossing the fence
+- [x] change `Sheep: N` text on blackboard
 
 ### Backlog
 
@@ -19,8 +19,8 @@
   - [x] Sheep reaches destination? +1 sheep count
   - [ ] end game condition
     - [ ] press "go to sleep" button
-    - [ ] reach N sheep
-    - [ ] fade screen
+    - [x] reach N sheep
+    - [x] fade screen
 - [ ] improve gameplay
   - [ ] variety of sheep types
   - [ ] tune spawn timing
@@ -32,21 +32,23 @@
     - https://opengameart.org/content/sleep-talking-loop-fantasy-rpg-sci-fi
   - [ ] Sound FX
     - [ ] on spawn
-    - [ ] on jump
-    - [ ] on cross finish line
+    - [x] on jump
+    - [x] on cross finish line
     - [ ] on end game ..
       - https://opengameart.org/content/sleep-inn
-  - [ ] Use left and right facing image for sheep
-  - [ ] Add background -- frame in sleep dreamy ness
+  - [x] Use left and right facing image for sheep
+  - [x] Add background -- frame in sleep dreamy ness
   - [ ] Add start game screen
-    - [ ] MVP: Excalibur play
+    - [x] MVP: Excalibur play
 
 ## Bugs
 
 - [x] 2 stacked ship on finish line start sinking :D -> this.kill()
 - [x] Sheep turn around when touching top of fence
-- [ ] Sheep can get stuck and stop moving
+- [..] Sheep can get stuck and stop moving
   - This could prevent game from being finishable, since we stop spawning more sheep
+  - minimal workaround added (set vel.x in update loop)
+- [ ] stacked sheep - can prevent jumping. can lead to jittery UX. can get you stuck
 
 ## Things to try:
 

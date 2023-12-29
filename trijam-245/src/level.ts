@@ -1,8 +1,11 @@
-import { Actor, CollisionType, Color, Engine, Scene, Timer } from "excalibur";
+import { Actor, CollisionType, Engine, Scene, Timer } from "excalibur";
 import { Background } from "./background";
 import {
+  COLLISION_OBJ_COLOR,
   DEBUG_FLAGS,
   FENCE_HEIGHT,
+  FENCE_WIDTH,
+  FENCE_X,
   FLOOR_HEIGHT,
   MAX_SHEEP,
   SCREEN_HEIGHT,
@@ -12,9 +15,13 @@ import { gameState } from "./gameState";
 import { Sounds } from "./loader";
 import { Sheep, SheepVariety } from "./sheep";
 import "./style.css";
-import { sheepCountLabel, sleepyOverlay, zzzLabel, zzzLabel2 } from "./ui";
-
-const GROUND_COLOR = Color.fromRGB(30, 160, 30, 0.5);
+import {
+  refreshUI,
+  sheepCountLabel,
+  sleepyOverlay,
+  zzzLabel,
+  zzzLabel2,
+} from "./ui";
 
 export class Level extends Scene {
   onInitialize(game: Engine): void {
@@ -26,43 +33,45 @@ export class Level extends Scene {
       y: FLOOR_HEIGHT - 32,
       width: SCREEN_WIDTH,
       height: 1,
-      color: Color.Red,
-      // visible: false,
+      color: COLLISION_OBJ_COLOR,
+      visible: DEBUG_FLAGS.VISIBLE_COLLISION_BOXES || false,
       collisionType: CollisionType.Fixed,
     });
     invisibleFloor.addTag("floor");
     game.add(invisibleFloor);
 
-    const leftWall = new Actor({
+    const invisibleLeftWall = new Actor({
       // off screen
-      x: -8,
-      y: SCREEN_HEIGHT - 2,
-      width: 16,
+      x: 1,
+      y: SCREEN_HEIGHT / 2,
+      width: 1,
       height: SCREEN_HEIGHT,
-      color: Color.fromRGB(160, 100, 100),
+      color: COLLISION_OBJ_COLOR,
+      visible: DEBUG_FLAGS.VISIBLE_COLLISION_BOXES || false,
       collisionType: CollisionType.Fixed,
     });
 
-    game.add(leftWall);
+    game.add(invisibleLeftWall);
 
     const fence = new Actor({
-      x: SCREEN_WIDTH / 2 - 16,
+      x: FENCE_X,
       y: FLOOR_HEIGHT - 32,
-      width: 16,
+      rotation: -Math.PI / 8,
+      width: FENCE_WIDTH,
       height: FENCE_HEIGHT,
-      color: Color.fromRGB(160, 100, 100, 0.5),
+      color: COLLISION_OBJ_COLOR,
       collisionType: CollisionType.Fixed,
+      visible: DEBUG_FLAGS.VISIBLE_COLLISION_BOXES || false,
     });
     fence.addTag("fence");
     game.add(fence);
 
-    game.add(sheepCountLabel);
-
     // Actors
+    const SHEEP_HEIGHT = 48;
     const spawnSheep = () => {
       const sheep = new Sheep({
         x: 64,
-        y: FLOOR_HEIGHT - 500,
+        y: FLOOR_HEIGHT - SHEEP_HEIGHT,
         variety:
           gameState.sheepCounted < 1
             ? SheepVariety.White
@@ -92,9 +101,11 @@ export class Level extends Scene {
     spawnSheep();
 
     // get sleepier..
+    game.add(sheepCountLabel);
     game.add(sleepyOverlay);
     game.add(zzzLabel);
     game.add(zzzLabel2);
+    refreshUI();
 
     // TODO: re-enable
     if (!DEBUG_FLAGS.DISABLE_MUSIC) {
