@@ -5,6 +5,7 @@ import {
   Font,
   FontUnit,
   Label,
+  TextAlign,
   vec,
 } from "excalibur";
 import { DEBUG_FLAGS, MAX_SHEEP, SCREEN_HEIGHT, SCREEN_WIDTH } from "./config";
@@ -12,12 +13,15 @@ import { gameState } from "./gameState";
 
 export const sheepCountLabel = new Label({
   text: "Sheep: 0",
-  pos: vec(20, 30),
+  pos: vec(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2 - 360),
   font: new Font({
     family: "impact",
     size: 24,
     unit: FontUnit.Px,
+    // baseAlign: BaseAlign.Top,
+    textAlign: TextAlign.Center,
   }),
+  color: Color.White,
 });
 
 export const sleepyOverlay = new Actor({

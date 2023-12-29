@@ -2,6 +2,15 @@
 
 ## Tasks
 
+### v2
+
+- [x] fix jumping to work in new world
+- [ ] change collider over feet https://excaliburjs.com/docs/colliders/#compositecollider
+- [ ] change `Sheep: N` text on blackboard
+- [x] sheep don't jump after crossing the fence
+
+### Backlog
+
 - [ ] Core game loop
   - [x] Add a sheep
   - [x] Add a wall
@@ -35,9 +44,9 @@
 ## Bugs
 
 - [x] 2 stacked ship on finish line start sinking :D -> this.kill()
-- [ ] Sheep turn around when touching top of fence
+- [x] Sheep turn around when touching top of fence
 - [ ] Sheep can get stuck and stop moving
-- [ ] Can prevent game from being finishable, since we stop spawning more sheep
+  - This could prevent game from being finishable, since we stop spawning more sheep
 
 ## Things to try:
 

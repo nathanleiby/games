@@ -30,6 +30,7 @@ export class Level extends Scene {
       // visible: false,
       collisionType: CollisionType.Fixed,
     });
+    invisibleFloor.addTag("floor");
     game.add(invisibleFloor);
 
     const leftWall = new Actor({
@@ -61,7 +62,7 @@ export class Level extends Scene {
     const spawnSheep = () => {
       const sheep = new Sheep({
         x: 64,
-        y: FLOOR_HEIGHT - 64,
+        y: FLOOR_HEIGHT - 500,
         variety:
           gameState.sheepCounted < 1
             ? SheepVariety.White

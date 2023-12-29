@@ -1,5 +1,5 @@
 import { Color, DisplayMode, Engine, Physics, vec } from "excalibur";
-import { SCREEN_HEIGHT, SCREEN_WIDTH } from "./config";
+import { DEBUG_FLAGS, SCREEN_HEIGHT, SCREEN_WIDTH } from "./config";
 import { Level } from "./level";
 import { loader } from "./loader";
 import "./style.css";
@@ -12,12 +12,12 @@ const game = new Engine({
   // antialiasing: false
   canvasElementId: "game",
   displayMode: DisplayMode.FitScreen,
-  // For debugging
-  suppressPlayButton: true,
   backgroundColor: Color.Black,
-});
 
-Physics.gravity = vec(0, 100);
+  // For debugging
+  suppressPlayButton: DEBUG_FLAGS.SUPRESS_PLAY_BUTTON,
+});
+Physics.gravity = vec(0, 200);
 
 const level = new Level();
 game.start(loader);
