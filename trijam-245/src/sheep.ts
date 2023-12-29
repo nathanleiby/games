@@ -36,7 +36,7 @@ export class Sheep extends Actor {
   }
 
   public onInitialize(_engine: Engine) {
-    const sprite = spriteSheet.sprites[0];
+    const sprite = spriteSheet.sprites[5]; // left facing
 
     this.vel = WALK_VEL;
 
@@ -137,5 +137,8 @@ export class Sheep extends Actor {
       this.jump();
       Sounds.jump.play(0.1);
     }
+
+    // point sheep in correct direction
+    this.graphics.flipHorizontal = this.vel.x >= 0;
   }
 }

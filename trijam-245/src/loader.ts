@@ -1,5 +1,5 @@
 import { ImageSource, Loader, Sound, SpriteSheet } from "excalibur";
-import background from "../images/4by3-background-rough.png";
+import background from "../images/background-v1.png";
 import sheepWalk from "../images/sheep_walk.png";
 import music from "../sounds/SleepHypnosis.mp3";
 import coin01Sound from "../sounds/Sound02ogg/coin01.ogg";

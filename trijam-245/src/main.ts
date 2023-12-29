@@ -1,4 +1,4 @@
-import { DisplayMode, Engine } from "excalibur";
+import { Color, DisplayMode, Engine } from "excalibur";
 import { SCREEN_HEIGHT, SCREEN_WIDTH } from "./config";
 import { Level } from "./level";
 import { loader } from "./loader";
@@ -14,6 +14,7 @@ const game = new Engine({
   displayMode: DisplayMode.FitScreen,
   // For debugging
   suppressPlayButton: true,
+  backgroundColor: Color.Black,
 });
 
 const level = new Level();

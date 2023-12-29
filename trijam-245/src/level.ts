@@ -1,34 +1,52 @@
-import { Actor, CollisionType, Color, Engine, Scene, Timer } from "excalibur";
+import {
+  Actor,
+  CollisionType,
+  Color,
+  Engine,
+  Scene,
+  Timer,
+  Vector,
+} from "excalibur";
 import {
   FENCE_HEIGHT,
   FLOOR_HEIGHT,
   GROUND_HEIGHT,
   MAX_SHEEP,
   SCREEN_HEIGHT,
+  SCREEN_WIDTH,
 } from "./config";
 import { gameState } from "./gameState";
-import { Sounds } from "./loader";
+import { Images, Sounds } from "./loader";
 import { Sheep, SheepVariety } from "./sheep";
 import "./style.css";
 import { sheepCountLabel, sleepyOverlay, zzzLabel, zzzLabel2 } from "./ui";
 
+const GROUND_COLOR = Color.fromRGB(30, 160, 30, 0.5);
+
 export class Level extends Scene {
   onInitialize(game: Engine): void {
     // Background
+    const backgroundImage = Images.background.toSprite();
+    const backgroundEntity = new Actor();
+    backgroundEntity.graphics.use(backgroundImage);
+    // backgroundEntity.scale.setTo(0.9, 0.9);
+    backgroundEntity.anchor = new Vector(0, 0);
+    game.add(backgroundEntity);
+
     const ground = new Actor({
-      x: 400,
-      y: 600 - 64,
-      width: 800,
+      x: SCREEN_WIDTH / 2,
+      y: SCREEN_HEIGHT - 64,
+      width: SCREEN_WIDTH,
       height: GROUND_HEIGHT,
-      color: Color.fromRGB(30, 160, 30),
+      color: GROUND_COLOR,
       collisionType: CollisionType.PreventCollision,
     });
     game.add(ground);
 
     const invisibleFloor = new Actor({
       x: 400,
-      y: 600 - 64 + 32,
-      width: 800,
+      y: SCREEN_HEIGHT - 64 + 32,
+      width: SCREEN_WIDTH,
       height: 1,
       color: Color.Red,
       visible: false,
@@ -37,6 +55,7 @@ export class Level extends Scene {
     game.add(invisibleFloor);
 
     const leftWall = new Actor({
+      // off screen
       x: -8,
       y: SCREEN_HEIGHT - 2,
       width: 16,
@@ -48,7 +67,7 @@ export class Level extends Scene {
     game.add(leftWall);
 
     const fence = new Actor({
-      x: 384,
+      x: SCREEN_WIDTH / 2 - 16,
       y: FLOOR_HEIGHT - 32,
       width: 16,
       height: FENCE_HEIGHT,
